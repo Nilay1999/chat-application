@@ -9,6 +9,7 @@ $(document).ready(function() {
             }
 
             reader.readAsDataURL(input.files[0]);
+            console.log(input.files[0])
         }
     }
 
