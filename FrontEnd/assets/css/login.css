@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+section {
+    margin-top: 5%;
+}
+
+* {
+    outline: none;
+}
+
+.form-control::placeholder {
+    font-size: 18px !important;
+    font-weight: normal;
+}
+
+.form-control {
+    color: rgb(10, 36, 59);
+    border: 1px solid white;
+    border-bottom: 1px solid black;
+    outline: none !important;
+}
+
+input[type=text],
+[type=email],
+[type=password],
+[type=phone] {
+    transition: ease-in-out, width .35s ease-in-out;
+    outline: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+input:focus {
+    outline-width: 0;
+    width: 90%;
+    outline: none !important;
+    border: 0;
+}
+
+span {
+    color: rgb(240, 57, 57);
+    padding-left: 2%;
+}
+
+.button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    color: #ffffff;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
