@@ -22,7 +22,7 @@ const isPasswordSecure = (password) => {
 };
 
 const isPhoneValid = (phone) => {
-    const re = new RegExp("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$");
+    const re = new RegExp("(0/91)?[7-9][0-9]{9}");
     return re.test(phone);
 };
 
