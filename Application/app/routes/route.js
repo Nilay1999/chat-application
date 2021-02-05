@@ -1,8 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 const mongoose = require('mongoose');
-const bodyparser = require('body-parser');
-const path = require('path')
+
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -17,6 +16,10 @@ mongoose.connect('mongodb://localhost:27017/Internship', {
 
 routes.get('/', (req, res) => {
     res.render('index');
+});
+
+routes.get('/register', (req, res) => {
+    res.render('register');
 });
 
 module.exports = routes;
