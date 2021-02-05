@@ -5,6 +5,7 @@ const confirmPasswordEl = document.querySelector('#pass2');
 const phoneEl = document.querySelector('#phone');
 const fnameEl = document.querySelector('#fname');
 const lnameEl = document.querySelector('#lname');
+const img = document.querySelector('#img');
 
 const form = document.querySelector('#form');
 
@@ -197,7 +198,7 @@ form.addEventListener('submit', function(e) {
 
     // submit to the server if the form is valid
     if (isFormValid) {
-        window.location = "./index.html";
+        alert('Success');
     }
 });
 

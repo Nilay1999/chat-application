@@ -22,4 +22,8 @@ routes.get('/register', (req, res) => {
     res.render('register');
 });
 
+routes.post('/register', (req, res) => {
+    res.json(req.body.data);
+})
+
 module.exports = routes;
