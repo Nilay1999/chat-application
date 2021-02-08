@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname + '/assets')));
 app.use('/uploads', express.static('uploads'))
 app.use(cors());
 
