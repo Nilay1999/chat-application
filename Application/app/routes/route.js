@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 const mongoose = require('mongoose');
-
+const user = require('../models/userSchema');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -23,7 +23,24 @@ routes.get('/register', (req, res) => {
 });
 
 routes.post('/register', (req, res) => {
-    res.json(req.body.data);
+
+    var { username, firstName, lastName, phone, password, email } = req.body;
+    var err;
+    user({
+        username,
+        firstName,
+        lastName,
+        phone,
+        password,
+        email
+    }).save((err, data) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(data);
+    })
+
+
 })
 
 module.exports = routes;

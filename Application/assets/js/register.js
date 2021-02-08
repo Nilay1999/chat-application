@@ -5,7 +5,8 @@ const confirmPasswordEl = document.querySelector('#pass2');
 const phoneEl = document.querySelector('#phone');
 const fnameEl = document.querySelector('#fname');
 const lnameEl = document.querySelector('#lname');
-const img = document.querySelector('#img');
+const img = document.querySelector('#image');
+
 
 const form = document.querySelector('#form');
 
@@ -198,7 +199,7 @@ form.addEventListener('submit', function(e) {
 
     // submit to the server if the form is valid
     if (isFormValid) {
-        alert('Success');
+        form.submit();
     }
 });
 
@@ -206,11 +207,10 @@ form.addEventListener('submit', function(e) {
 const debounce = (fn, delay = 500) => {
     let timeoutId;
     return (...args) => {
-        // cancel the previous timer
         if (timeoutId) {
             clearTimeout(timeoutId);
         }
-        // setup a new timer
+
         timeoutId = setTimeout(() => {
             fn.apply(null, args)
         }, delay);

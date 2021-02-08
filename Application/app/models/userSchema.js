@@ -26,11 +26,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    profilePicture: {
-        type: String,
-        required: true
-    },
-    contact: {
+    phone: {
         type: String,
         required: true
     }

@@ -14,12 +14,11 @@
 </head>
 
 <body>
-
     <section>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-8 col-xl-6">
-                    <form action="/" id="form">
+                    <form action="/register" id="form" method="POST">
                         <div class="row">
                             <div class="col text-center">
                                 <h1>Sign Up</h1>
@@ -28,51 +27,51 @@
                                     <div class="upload-button">
                                         <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
                                     </div>
-                                    <input class="file-upload" type="file" accept="image/*" id="image" />
+                                    <input class="file-upload" type="file" accept="image/*" id="image" name="profilePicture" required />
                                 </div>
 
                             </div>
                         </div>
                         <div class="row align-items-center">
                             <div class="col mt-4">
-                                <input type="text" class="form-control" placeholder="Username" id="username">
+                                <input type="text" class="form-control" placeholder="Username" id="username" name="username">
                                 <span></span>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="First Name" id="fname">
+                                <input type="text" class="form-control" placeholder="First Name" id="fname" name="firstName">
                                 <span></span>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Last Name" id="lname">
-                                <span></span>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mt-4">
-                            <div class="col">
-                                <input type="email" class="form-control" placeholder="Email" id="email">
+                                <input type="text" class="form-control" placeholder="Last Name" id="lname" name="lastName">
                                 <span></span>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4">
                             <div class="col">
-                                <input type="password" class="form-control" placeholder="Password" id="pass1">
-                                <span></span>
-                            </div>
-                            <div class="col">
-                                <input type="password" class="form-control" placeholder="Confirm Password" id="pass2">
+                                <input type="email" class="form-control" placeholder="Email" id="email" name="email">
                                 <span></span>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4">
                             <div class="col">
-                                <input type="phone" class="form-control" placeholder="Phone Number" id="phone">
+                                <input type="password" class="form-control" placeholder="Password" id="pass1" name="pass1">
+                                <span></span>
+                            </div>
+                            <div class="col">
+                                <input type="password" class="form-control" placeholder="Confirm Password" id="pass2" name="password">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-4">
+                            <div class="col">
+                                <input type="phone" class="form-control" placeholder="Phone Number" id="phone" name="phone">
                                 <span></span>
                             </div>
                         </div>
                         <div class="row justify-content-center mt-2">
-                            <button class="btn btn-primary mt-2 mb-4 submit">Register</button>
+                            <button type="submit" class="btn btn-primary mt-2 mb-4 submit">Register</button>
                         </div>
                     </form>
                 </div>
