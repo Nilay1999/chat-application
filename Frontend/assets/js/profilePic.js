@@ -1,13 +1,13 @@
 $image_crop = $('#upload-image').croppie({
     enableExif: true,
     viewport: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         type: 'circle'
     },
     boundary: {
-        width: 250,
-        height: 250
+        width: 200,
+        height: 200
     }
 
 });
