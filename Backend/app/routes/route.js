@@ -1,21 +1,11 @@
 const express = require('express');
 const routes = express.Router();
-const user = require('../models/userSchema');
+const registerController = require('../controllers/registerUser');
+const loginController = require('../controllers/loginUser');
 
-/*  Register Section */
+routes.post('/register', registerController.register);
 
-routes.post('/register', (req, res) => {
-    console.log(req.body)
-});
+routes.post('/login', loginController.login);
 
-/*  Register Section  Ends*/
-
-/*  Login Section */
-
-routes.post('/login', (req, res) => {
-    res.json(req.body);
-})
-
-/*  Register Section  Ends*/
 
 module.exports = routes;

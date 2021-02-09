@@ -202,45 +202,6 @@ form.addEventListener('submit', function(e) {
     }
 });
 
-
-const ajaxCall = () => {
-    let username = usernameEl.value;
-    let email = emailEl.value;
-    let password = passwordEl.value;
-    let phone = phoneEl.value;
-    let fname = fnameEl.value;
-    let lname = lnameEl.value;
-    let imgjson = img.value;
-
-    const data = {
-        "username": username,
-        "password": password,
-        "email": email,
-        "fname": fname,
-        "lname": lname,
-        "img": imgjson,
-        "phone": phone
-    }
-
-    console.log(JSON.stringify(data));
-    $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8080/register',
-            method: 'post',
-            dataType: 'json',
-            data: JSON.stringify(data),
-            success: function(response) {
-                alert('server ')
-            },
-            error: function(response) {
-                alert('server error occured')
-            }
-        });
-    })
-
-
-}
-
 const debounce = (fn, delay = 500) => {
     let timeoutId;
     return (...args) => {
@@ -279,3 +240,42 @@ form.addEventListener('input', debounce(function(e) {
             break;
     }
 }));
+
+
+
+
+const ajaxCall = () => {
+    let username = usernameEl.value;
+    let email = emailEl.value;
+    let password = passwordEl.value;
+    let phone = phoneEl.value;
+    let fname = fnameEl.value;
+    let lname = lnameEl.value;
+    let imgjson = img.value;
+
+    const data = {
+        "username": username,
+        "password": password,
+        "email": email,
+        "fname": fname,
+        "lname": lname,
+        "img": imgjson,
+        "phone": phone
+    }
+
+    console.log(JSON.stringify(data));
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/register',
+            method: 'post',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function() {
+                window.location = '/index';
+            },
+            error: function() {
+                alert('server error occured')
+            }
+        });
+    })
+}
