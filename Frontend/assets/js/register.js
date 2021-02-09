@@ -5,7 +5,7 @@ const confirmPasswordEl = document.querySelector('#pass2');
 const phoneEl = document.querySelector('#phone');
 const fnameEl = document.querySelector('#fname');
 const lnameEl = document.querySelector('#lname');
-const img = document.querySelector('#image');
+const img = document.querySelector('#images');
 
 
 const form = document.querySelector('#form');
@@ -199,10 +199,32 @@ form.addEventListener('submit', function(e) {
 
     // submit to the server if the form is valid
     if (isFormValid) {
-        form.submit();
+        ajaxCall();
     }
 });
 
+
+const ajaxCall = () => {
+    let username = usernameEl.value;
+    let email = emailEl.value;
+    let password = passwordEl.valuel
+    let phone = phoneEl.value;
+    let fname = fnameEl.value;
+    let lname = lnameEl.value;
+    let imgjson = img.value;
+
+    const data = {
+        "username": username,
+        "password": password,
+        "email": email,
+        "fname": fname,
+        "lname": lname,
+        "img": imgjson,
+        "phone": phone
+    }
+
+
+}
 
 const debounce = (fn, delay = 500) => {
     let timeoutId;
