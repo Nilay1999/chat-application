@@ -134,7 +134,7 @@ const checkPassword = () => {
 
 const checkConfirmPassword = () => {
     let valid = false;
-    // check confirm password
+
     const confirmPassword = confirmPasswordEl.value.trim();
     const password = passwordEl.value.trim();
 
@@ -151,36 +151,35 @@ const checkConfirmPassword = () => {
 };
 
 const showError = (input, message) => {
-    // get the form-field element
+
     const formField = input.parentElement;
-    // add the error class
+
     formField.classList.remove('success');
     formField.classList.add('error');
 
-    // show the error message
     const error = formField.querySelector('span');
     error.textContent = message;
 };
 
 const showSuccess = (input) => {
-    // get the form-field element
+
     const formField = input.parentElement;
 
-    // remove the error class
+
     formField.classList.remove('error');
     formField.classList.add('success');
 
-    // hide the error message
+
     const error = formField.querySelector('span');
     error.textContent = '';
 }
 
 
 form.addEventListener('submit', function(e) {
-    // prevent the form from submitting
+
     e.preventDefault();
 
-    // validate fields
+
     let isUsernameValid = checkUsername(),
         isEmailValid = checkEmail(),
         isPasswordValid = checkPassword(),
@@ -197,7 +196,7 @@ form.addEventListener('submit', function(e) {
         isPhoneNumberValid &&
         isConfirmPasswordValid;
 
-    // submit to the server if the form is valid
+
     if (isFormValid) {
         ajaxCall();
     }
@@ -207,7 +206,7 @@ form.addEventListener('submit', function(e) {
 const ajaxCall = () => {
     let username = usernameEl.value;
     let email = emailEl.value;
-    let password = passwordEl.valuel
+    let password = passwordEl.value;
     let phone = phoneEl.value;
     let fname = fnameEl.value;
     let lname = lnameEl.value;
@@ -222,6 +221,22 @@ const ajaxCall = () => {
         "img": imgjson,
         "phone": phone
     }
+
+    console.log(JSON.stringify(data));
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/register',
+            method: 'post',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function(response) {
+                alert('server ')
+            },
+            error: function(response) {
+                alert('server error occured')
+            }
+        });
+    })
 
 
 }

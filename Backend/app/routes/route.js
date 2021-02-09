@@ -5,7 +5,7 @@ const user = require('../models/userSchema');
 /*  Register Section */
 
 routes.post('/register', (req, res) => {
-    console.log("Called")
+    console.log(req.body)
 });
 
 /*  Register Section  Ends*/
