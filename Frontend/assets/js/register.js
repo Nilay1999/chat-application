@@ -7,6 +7,7 @@ const fnameEl = document.querySelector('#fname');
 const lnameEl = document.querySelector('#lname');
 const img = document.querySelector('#images');
 
+const warning = document.querySelector('#warning');
 
 const form = document.querySelector('#form');
 
@@ -270,8 +271,11 @@ const ajaxCall = () => {
             method: 'post',
             dataType: 'json',
             data: JSON.stringify(data),
-            success: function() {
-                window.location = '/index';
+            success: function(result,status,xhr) {
+                warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>${result.msg}</strong>
+            </div>`
             },
             error: function() {
                 alert('server error occured')
