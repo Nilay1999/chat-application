@@ -242,9 +242,6 @@ form.addEventListener('input', debounce(function(e) {
     }
 }));
 
-
-
-
 const ajaxCall = () => {
     let username = usernameEl.value;
     let email = emailEl.value;
@@ -255,12 +252,12 @@ const ajaxCall = () => {
     let imgjson = img.value;
 
     const data = {
-        "username": username,
+        "userName": username,
         "password": password,
         "email": email,
-        "fname": fname,
-        "lname": lname,
-        "img": imgjson,
+        "firstName": fname,
+        "lastName": lname,
+        "images": imgjson,
         "phone": phone
     }
 
@@ -270,12 +267,21 @@ const ajaxCall = () => {
             url: 'http://localhost:8080/register',
             method: 'post',
             dataType: 'json',
-            data: JSON.stringify(data),
-            success: function(result,status,xhr) {
-                warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>${result.msg}</strong>
-            </div>`
+            data: data,
+            success: function(res) {
+                if(res.msg == 'success'){
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Success</strong>
+                    </div>`
+                }
+                else if(res.msg == 'user')
+                {
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Error</strong>
+                    </div>`
+                }
             },
             error: function() {
                 alert('server error occured')

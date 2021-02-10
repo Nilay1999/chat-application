@@ -10,17 +10,14 @@ const userSchema = new Schema({
     firstName: {
         type: String,
         required: true,
-        minlength: 3
     },
     lastName: {
         type: String,
         required: true,
-        minlength: 3
     },
     password: {
         type: String,
         required: true,
-        minlength: 8
     },
     email: {
         type: String,
