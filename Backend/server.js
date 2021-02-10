@@ -9,8 +9,7 @@ const mongoose = require('./connection'); // In-Use
 
 app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()) // JSON object
-app.use(express.static(path.join(__dirname + '/assets')));
-app.use('/uploads', express.static('uploads'))
+app.use('/app/uploads', express.static('/uploads'))
 app.use(cors());
 
 app.use('/', routes);

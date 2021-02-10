@@ -1,10 +1,11 @@
-const { request } = require('http');
 const mongoose = require('mongoose');
 const User = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
 
 exports.register = (req, res) => {
 
+    console.log(req.body)
+    /*
     var {email,password,userName,firstName,lastName,phone} = req.body;
 
     User.findOne({email:email},function(err,data){
@@ -36,7 +37,7 @@ exports.register = (req, res) => {
                     })
                 })
             })
-            
         }
   });
+  */
 }

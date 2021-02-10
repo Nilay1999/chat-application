@@ -243,6 +243,9 @@ form.addEventListener('input', debounce(function(e) {
 }));
 
 const ajaxCall = () => {
+
+
+    /*
     let username = usernameEl.value;
     let email = emailEl.value;
     let password = passwordEl.value;
@@ -250,24 +253,27 @@ const ajaxCall = () => {
     let fname = fnameEl.value;
     let lname = lnameEl.value;
     let imgjson = img.value;
-
-    const data = {
-        "userName": username,
-        "password": password,
-        "email": email,
-        "firstName": fname,
-        "lastName": lname,
-        "images": imgjson,
-        "phone": phone
-    }
-
-    console.log(JSON.stringify(data));
+`   */
+    var file = document.getElementById('images').files[0];
     $(document).ready(function() {
+        
+        var formData = new FormData();
+        formData.append('userName',usernameEl.value);
+        formData.append('firstName',fnameEl.value);
+        formData.append('email',emailEl.value);
+        formData.append('lastName',lnameEl.value);
+        formData.append('password',passwordEl.value);
+        formData.append('phone',phoneEl.value);
+        formData.append('img',);
+
+        var obj = Object.fromEntries(formData);
+        
         $.ajax({
             url: 'http://localhost:8080/register',
             method: 'post',
             dataType: 'json',
-            data: data,
+            data: obj,
+            enctype: 'multipart/form-data',
             success: function(res) {
                 if(res.msg == 'success'){
                     warning.innerHTML = `<div class="alert alert-dismissible alert-success">
