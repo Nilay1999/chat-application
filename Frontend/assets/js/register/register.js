@@ -259,18 +259,17 @@ const ajaxCall = () => {
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText == 'success'){
-                warning.innerHTML = `<div class="alert alert-dismissible alert-success">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Success</strong>
-                        </div>`
-                form.submit();
-            }
-            else{
+            if(this.responseText == 'user'){
                 warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>User Already Exists</strong>
                 </div>`
+                console.log(this.responseText)
+                
+            }
+            else{
+                const response = JSON.parse(this.responseText);
+                console.log(response._id);
             }
         }
     };

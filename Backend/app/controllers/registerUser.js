@@ -34,7 +34,7 @@ exports.register = (req, res) => {
                         if(err)
                             console.log(err)
                         else 
-                            res.send('success')
+                            res.send(data)
                     })
                 })
             })

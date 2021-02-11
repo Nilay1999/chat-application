@@ -15,7 +15,9 @@ $('#images').on('change', function() {
     var reader = new FileReader();
     reader.onload = function(e) {
         $image_crop.croppie('bind', {
-            url: e.target.result
+            url: e.target.result,
+            type: 'canvas',
+		    size: 'viewport'
         }).then(function() {
             console.log('jQuery bind complete');
         });
