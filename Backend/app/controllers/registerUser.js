@@ -4,13 +4,13 @@ const bcrypt = require('bcryptjs');
 
 exports.register = (req, res) => {
 
-    console.log(req.body)
-    /*
+   
     var {email,password,userName,firstName,lastName,phone} = req.body;
+    var img = req.file.path;
 
     User.findOne({email:email},function(err,data){
         if(data){
-            res.json({msg:'user'})
+            res.send('user')
         }
         else{
             bcrypt.genSalt(10, (err, salt) => {
@@ -28,16 +28,17 @@ exports.register = (req, res) => {
                         password,
                         firstName,
                         lastName,
-                        phone
+                        phone,
+                        img
                     }).save((err,data)=>{
                         if(err)
                             console.log(err)
                         else 
-                            res.json({msg:'success'})
+                            res.send('success')
                     })
                 })
             })
         }
   });
-  */
+  
 }

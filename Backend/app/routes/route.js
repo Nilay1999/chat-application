@@ -5,7 +5,7 @@ const loginController = require('../controllers/loginUser');
 const upload = require('../middleware/multer')
 
 
-routes.post('/register', upload.single('images'), registerController.register);
+routes.post('/register', upload.single('img'), registerController.register);
 
 routes.post('/login', loginController.login);
 
