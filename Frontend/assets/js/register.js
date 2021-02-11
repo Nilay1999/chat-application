@@ -244,16 +244,6 @@ form.addEventListener('input', debounce(function(e) {
 
 const ajaxCall = () => {
 
-    /*
-    let username = usernameEl.value;
-    let email = emailEl.value;
-    let password = passwordEl.value;
-    let phone = phoneEl.value;
-    let fname = fnameEl.value;
-    let lname = lnameEl.value;
-    let imgjson = img.value;
-`   */
-
     var file = document.getElementById('images').files[0]
     var formData = new FormData();
     formData.append('userName',usernameEl.value);
@@ -274,6 +264,7 @@ const ajaxCall = () => {
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong>Success</strong>
                         </div>`
+                form.submit();
             }
             else{
                 warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
