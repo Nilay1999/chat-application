@@ -6,6 +6,6 @@ const upload = require('../middleware/multer')
 
 routes.post('/register', upload.single('img'), registerController.register);
 
-routes.post('/login', loginController.login);
+routes.post('/login',upload.single() ,loginController.login);
 
 module.exports = routes;

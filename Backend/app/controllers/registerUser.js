@@ -1,28 +1,26 @@
 const mongoose = require('mongoose');
-const User = require('../models/userSchema');
+const user = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
 
 exports.register = (req, res) => {
 
-   
-    var {email,password,userName,firstName,lastName,phone} = req.body;
+    var { email, password, userName, firstName, lastName, phone } = req.body;
     var img = req.file.path;
 
-    User.findOne({email:email},function(err,data){
-        if(data){
+    user.findOne({ email: email }, function(err, data) {
+        if (data) {
             res.send('user')
-        }
-        else{
+        } else {
             bcrypt.genSalt(10, (err, salt) => {
-                if (err){
+                if (err) {
                     throw err
                 }
                 bcrypt.hash(password, salt, (err, hash) => {
-                    if (err){ 
+                    if (err) {
                         throw err
                     }
                     password = hash;
-                    User({
+                    user({
                         email,
                         userName,
                         password,
@@ -30,15 +28,15 @@ exports.register = (req, res) => {
                         lastName,
                         phone,
                         img
-                    }).save((err,data)=>{
-                        if(err)
+                    }).save((err, data) => {
+                        if (err)
                             console.log(err)
-                        else 
+                        else
                             res.send(data)
                     })
                 })
             })
         }
-  });
-  
+    });
+
 }

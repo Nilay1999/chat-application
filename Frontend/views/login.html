@@ -7,7 +7,8 @@
 
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/login.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>Login</title>
 </head>
 
@@ -16,7 +17,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-8 col-xl-6">
-                    <form action="/" id="form">
+                    <form action="index.html" id="form" method="post" enctype="application/x-www-form-urlencoded">
                         <div class="row">
                             <div class="col text-center">
                                 <h1>Login</h1>
@@ -24,28 +25,32 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col mt-4">
-                                <input type="text" class="form-control" placeholder="Username" id="username">
+                                <input type="text" class="form-control" placeholder="Email" id="email" name="email">
                                 <span></span>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4">
                             <div class="col">
-                                <input type="password" class="form-control" placeholder="Password" id="pass1">
+                                <input type="password" class="form-control" placeholder="Password" id="password"
+                                    name="password">
                                 <span></span>
                             </div>
+                        </div>
+                        <div class="row justify-content-center mt-4" id="warning">
 
                         </div>
 
                         <div class="row justify-content-center mt-2">
-                            <button class="button"><span>Lets Go !</span></button>
+                            <button class="button" type="submit"><span>Lets Go !</span></button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    <script rel="stylesheet" type="text/javascript" src="../assets/js/jquery.min.js"></script>
-
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="../assets/js/login/login.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
 
 </body>
 

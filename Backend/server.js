@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('./connection'); // In-Use
 
-app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()) // JSON object
+app.use(bodyParser.urlencoded({ extended: true })) // parse application/x-www-form-urlencoded
 app.use('/app/uploads', express.static('/uploads'))
 app.use(cors());
 

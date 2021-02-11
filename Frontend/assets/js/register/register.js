@@ -268,8 +268,14 @@ const ajaxCall = () => {
                 
             }
             else{
+                
                 const response = JSON.parse(this.responseText);
+                //const data = {"username":response.userName,"email":response.email};
+                //xhr.open('POST', 'http://localhost:8080/index');
+                //xhr.setRequestHeader('Content-Type', 'application/json');
+                //xhr.send(data);
                 console.log(response._id);
+                form.submit();
             }
         }
     };
