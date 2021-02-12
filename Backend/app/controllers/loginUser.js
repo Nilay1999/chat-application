@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const user = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 exports.login = (req, res) => {
 
@@ -20,7 +21,16 @@ exports.login = (req, res) => {
                     res.json('password')
                 }
                 if (match) {
-                    res.json('success');
+                    //res.json('success');
+                    const token = jwt.sign({ id: data._id }, process.env.JWT_SECRET);
+                    res.json({
+                        token,
+                        user: {
+                            id: data._id,
+                            email: data.email
+                        }
+                    });
+
                 }
             });
         }
