@@ -1,26 +1,80 @@
-$image_crop = $('#upload-image').croppie({
-    enableExif: true,
+$(".gambar").attr("src", "https://user.gadjian.com/static/images/personnel_boy.png");
+var $uploadCrop,
+    tempFilename,
+    rawImg,
+    imageId;
+
+function readFile(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.upload-demo').addClass('ready');
+            $('#cropImagePop').modal('show');
+            rawImg = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$uploadCrop = $('#upload-demo').croppie({
     viewport: {
         width: 150,
-        height: 150,
-        type: 'circle'
+        height: 200,
     },
-    boundary: {
-        width: 200,
-        height: 200
-    }
+    enforceBoundary: false,
+    enableExif: true
+});
+$('#cropImagePop').on('shown.bs.modal', function() {
 
+    $uploadCrop.croppie('bind', {
+        url: rawImg
+    }).then(function() {
+        console.log('jQuery bind complete');
+    });
 });
-$('#images').on('change', function() {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        $image_crop.croppie('bind', {
-            url: e.target.result,
-            type: 'canvas',
-		    size: 'viewport'
-        }).then(function() {
-            console.log('jQuery bind complete');
-        });
-    }
-    reader.readAsDataURL(this.files[0]);
+
+$('.item-img').on('change', function() {
+    imageId = $(this).data('id');
+    tempFilename = $(this).val();
+    $('#cancelCropBtn').data('id', imageId);
+    readFile(this);
 });
+$('#cropImageBtn').on('click', function(ev) {
+    $uploadCrop.croppie('result', {
+        type: 'base64',
+        format: 'jpeg',
+        size: { width: 150, height: 200 }
+    }).then(function(resp) {
+        $('#item-img-output').attr('src', resp);
+        $('#cropImagePop').modal('hide');
+    });
+});
+
+// $image_crop = $('#upload-image').croppie({
+//     enableExif: true,
+//     viewport: {
+//         width: 150,
+//         height: 150,
+//         type: 'circle'
+//     },
+//     boundary: {
+//         width: 200,
+//         height: 200
+//     }
+
+// });
+// $('#images').on('change', function() {
+//     var reader = new FileReader();
+//     reader.onload = function(e) {
+//         $image_crop.croppie('bind', {
+//             url: e.target.result,
+//             type: 'canvas',
+// 		    size: 'viewport'
+//         }).then(function() {
+//             console.log('jQuery bind complete');
+//         });
+//     }
+//     reader.readAsDataURL(this.files[0]);
+// });
+
+// Start upload preview image
