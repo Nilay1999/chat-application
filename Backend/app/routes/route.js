@@ -7,6 +7,6 @@ const auth = require('../middleware/auth');
 
 routes.post('/register', upload.single('img'), registerController.register);
 
-routes.post('/login', upload.single(), loginController.login);
+routes.post('/login', upload.single(''), loginController.login);
 
 module.exports = routes;

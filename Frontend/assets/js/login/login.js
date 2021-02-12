@@ -101,32 +101,60 @@ const ajaxCall = () => {
 
     console.log(Object.fromEntries(formData))
 
-    xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/login');
-    xhr.send(formData);
+    $(document).ready(function() {
+            $.ajax({
+                url: 'http://localhost:8080/login',
+                method: 'post',
+                processData: false,
+                contentType: false,
+                data: formData,
+                enctype: 'multipart/form-data',
+                success: function(res) {
+                    if (res.msg == 'email') {
+                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>User Doesn't Exists</strong>
+                    </div>`
+                    } else if (res.msg == 'password') {
+                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Password Incorrect</strong>
+                    </div>`
+                    } else {
+                        form.submit();
+                    }
+                },
+                error: function() {
+                    alert('server error occured')
+                }
+            });
+        })
+        /*
+        xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:8080/login');
+        xhr.send(formData);
+        xhr.onreadystatechange = function() {
 
+            if (this.readyState == 4 && this.status == 200) {
+                const response = JSON.parse(this.responseText);
+                if (response == 'email') {
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>User Doesn't Exists</strong>
+                        </div>`
+                } else if (response == 'password') {
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Password Incorrect !</strong>
+                        </div>`
 
-    xhr.onreadystatechange = function() {
-
-        if (this.readyState == 4 && this.status == 200) {
-            const response = JSON.parse(this.responseText);
-            if (response == 'email') {
-                warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>User Doesn't Exists</strong>
-                </div>`
-            } else if (response == 'password') {
-                warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Password Incorrect !</strong>
-                </div>`
-
-            } else {
-                warning.innerHTML = `<div class="alert alert-dismissible alert-primary">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Welcome !</strong>
-                </div>`
+                } else {
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-primary">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Welcome !</strong>
+                        </div>`
+                }
             }
-        }
-    };
+        };
+        */
 }

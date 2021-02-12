@@ -246,16 +246,17 @@ const ajaxCall = () => {
 
     var file = document.getElementById('images').files[0]
     var formData = new FormData();
-    formData.append('userName',usernameEl.value);
-    formData.append('firstName',fnameEl.value);
-    formData.append('email',emailEl.value);
-    formData.append('lastName',lnameEl.value);
-    formData.append('password',passwordEl.value);
-    formData.append('phone',phoneEl.value);
-    formData.append('img',file)
+    formData.append('userName', usernameEl.value);
+    formData.append('firstName', fnameEl.value);
+    formData.append('email', emailEl.value);
+    formData.append('lastName', lnameEl.value);
+    formData.append('password', passwordEl.value);
+    formData.append('phone', phoneEl.value);
+    formData.append('img', file)
 
     console.log(Object.fromEntries(formData))
 
+    /*
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -282,34 +283,29 @@ const ajaxCall = () => {
   
     xhr.open('POST', 'http://localhost:8080/register');
     xhr.send(formData);
-    /*
-        $(document).ready(function() {
-            $.ajax({
-                url: 'http://localhost:8080/register',
-                method: 'post',
-                dataType: 'json',
-                contentType : false ,
-                cache : false,
-                data: formData,
-                enctype: 'multipart/form-data',
-                success: function(res) {
-                    if(res.msg == 'success'){
-                        warning.innerHTML = `<div class="alert alert-dismissible alert-success">
+    */
+
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/register',
+            method: 'post',
+            processData: false,
+            contentType: false,
+            data: formData,
+            enctype: 'multipart/form-data',
+            success: function(res) {
+                if (res.msg == 'user') {
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Success</strong>
+                            <strong>User Already Exists</strong>
                         </div>`
-                    }
-                    else if(res.msg == 'user')
-                    {
-                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Error</strong>
-                        </div>`
-                    }
-                },
-                error: function() {
-                    alert('server error occured')
+                } else {
+                    form.submit();
                 }
-            });
-        })*/
+            },
+            error: function() {
+                alert('server error occured')
+            }
+        });
+    })
 }

@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const user = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
 
@@ -9,7 +8,7 @@ exports.register = (req, res) => {
 
     user.findOne({ email: email }, function(err, data) {
         if (data) {
-            res.send('user')
+            res.json({ msg: 'user' })
         } else {
             bcrypt.genSalt(10, (err, salt) => {
                 if (err) {
