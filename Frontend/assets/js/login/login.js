@@ -115,6 +115,7 @@ const ajaxCall = () => {
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>User Doesn't Exists</strong>
                     </div>`
+
                     } else if (res.msg == 'password') {
                         warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -122,6 +123,7 @@ const ajaxCall = () => {
                     </div>`
                     } else {
                         form.submit();
+                        localStorage.setItem("auth-token", res.token);
                     }
                 },
                 error: function() {
