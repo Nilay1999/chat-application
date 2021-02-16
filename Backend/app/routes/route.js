@@ -4,12 +4,15 @@ const registerController = require('../controllers/registerUser');
 const loginController = require('../controllers/loginUser');
 const upload = require('../middleware/multer');
 const auth = require('../middleware/auth');
-const testController = require('../controllers/testToken');
+const deleteController = require('../controllers/deleteUser');
+const homeController = require('../controllers/userHome');
 
 routes.post('/register', upload.single('img'), registerController.register);
 
-routes.post('/login', upload.single(''), loginController.login);
+routes.post('/login', upload.single(), loginController.login);
 
-routes.delete('/test', auth, testController.test);
+routes.delete('/test', auth, deleteController.deleteUser);
+
+routes.get('/home', auth, homeController.home);
 
 module.exports = routes;

@@ -1,6 +1,6 @@
 const user = require('../models/userSchema');
 
-exports.test = async(req, res) => {
+exports.deleteUser = async(req, res) => {
     try {
         const deleteUser = await user.findByIdAndDelete(req.user);
         res.json(deleteUser);

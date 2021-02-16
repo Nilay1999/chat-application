@@ -122,13 +122,15 @@ const ajaxCall = () => {
                         <strong>Password Incorrect</strong>
                     </div>`
                     } else {
+                        //form.submit();
+                        //XMLHttpRequest.setRequestHeader("x-auth-token", res.token)
+                        // let header = new Headers();
+                        // header.append('x-auth-token', res.token)
+                        // console.log(header.get('x-auth-token'));
+                        localStorage.setItem("x-auth-token", res.token);
                         form.submit();
-                        localStorage.setItem("auth-token", res.token);
                     }
                 },
-                error: function() {
-                    alert('server error occured')
-                }
             });
         })
         /*
