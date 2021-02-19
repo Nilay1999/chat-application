@@ -10,14 +10,14 @@ exports.login = (req, res) => {
         if (err) {
             console.log(err)
         } else if (!data) {
-            res.json({ msg: 'email' })
+            res.status(404).send('User Not Found !');
         } else {
             bcrypt.compare(password, data.password, (err, match) => {
                 if (err) {
                     console.log('Bcrypt Error');
                 }
                 if (!match) {
-                    res.json({ msg: 'password' })
+                    res.status(405).send('Password Not Matched !');
                 }
                 if (match) {
                     const token = jwt.sign({ id: data._id }, process.env.JWT_SECRET);

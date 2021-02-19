@@ -9,7 +9,7 @@ const homeController = require('../controllers/userHome');
 
 routes.post('/register', upload.single('img'), registerController.register);
 
-routes.post('/login', upload.single(), loginController.login);
+routes.post('/login', loginController.login);
 
 routes.delete('/test', auth, deleteController.deleteUser);
 

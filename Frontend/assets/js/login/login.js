@@ -95,71 +95,34 @@ form.addEventListener('submit', function(e) {
 
 const ajaxCall = () => {
 
-    var formData = new FormData();
-    formData.append('email', emailEl.value);
-    formData.append('password', passwordEl.value);
+    var user = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+    }
 
-    console.log(Object.fromEntries(formData))
 
     $(document).ready(function() {
-            $.ajax({
-                url: 'http://localhost:8080/login',
-                method: 'post',
-                processData: false,
-                contentType: false,
-                data: formData,
-                enctype: 'multipart/form-data',
-                success: function(res) {
-                    if (res.msg == 'email') {
-                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>User Doesn't Exists</strong>
-                    </div>`
-
-                    } else if (res.msg == 'password') {
-                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Password Incorrect</strong>
-                    </div>`
-                    } else {
-                        //form.submit();
-                        //XMLHttpRequest.setRequestHeader("x-auth-token", res.token)
-                        // let header = new Headers();
-                        // header.append('x-auth-token', res.token)
-                        // console.log(header.get('x-auth-token'));
-                        localStorage.setItem("x-auth-token", res.token);
-
-                        form.submit();
-                    }
+        $.ajax({
+            url: 'http://localhost:8080/login',
+            method: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(user),
+            statusCode: {
+                404: function(response) {
+                    $('#warning').html(response.responseText);
                 },
-            });
-        })
-        /*
-        xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/login');
-        xhr.send(formData);
-        xhr.onreadystatechange = function() {
-
-            if (this.readyState == 4 && this.status == 200) {
-                const response = JSON.parse(this.responseText);
-                if (response == 'email') {
-                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>User Doesn't Exists</strong>
-                        </div>`
-                } else if (response == 'password') {
-                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Password Incorrect !</strong>
-                        </div>`
-
-                } else {
-                    warning.innerHTML = `<div class="alert alert-dismissible alert-primary">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Welcome !</strong>
-                        </div>`
+                405: function(response) {
+                    $('#warning').html(response.responseText);
+                },
+                500: function() {
+                    alert("Server Error")
                 }
-            }
-        };
-        */
+            },
+            success: function(res) {
+                localStorage.setItem("x-auth-token", res.token);
+                form.submit();
+            },
+        });
+    })
 }
