@@ -1,5 +1,10 @@
 var row = document.querySelector('tbody');
 
+$('#logout').on('click', function() {
+    localStorage.removeItem('x-auth-token');
+    window.location = 'login.html';
+})
+
 $(document).ready(function() {
     $.ajax({
         url: 'http://localhost:8080/home',
@@ -19,8 +24,13 @@ $(document).ready(function() {
             }
             row.innerHTML = userRow;
         },
-        error: function() {
-            alert("Server Error");
+        error: function(xhr, status, error) {
+            if (!localStorage.getItem('x-auth-toke')) {
+                alert('No token');
+                window.location = 'login.html';
+            } else {
+                alert('server Error')
+            }
         }
     })
 })

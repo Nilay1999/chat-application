@@ -33,3 +33,8 @@ exports.login = (req, res) => {
         }
     })
 }
+
+exports.logout = (req, res) => {
+    const token = req.header("x-auth-token");
+    jwt.destroy(token);
+}

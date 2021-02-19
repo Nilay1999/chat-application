@@ -15,4 +15,6 @@ routes.delete('/test', auth, deleteController.deleteUser);
 
 routes.get('/home', auth, homeController.home);
 
+routes.get('/logout', loginController.logout);
+
 module.exports = routes;
