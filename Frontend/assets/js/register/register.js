@@ -256,6 +256,30 @@ const ajaxCall = () => {
 
     console.log(Object.fromEntries(formData))
 
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://localhost:8080/register',
+            method: 'post',
+            processData: false,
+            contentType: false,
+            data: formData,
+            enctype: 'multipart/form-data',
+            success: function(res) {
+                if (res.msg == 'user') {
+                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>User Already Exists</strong>
+                        </div>`
+                } else {
+                    form.submit();
+                }
+            },
+            error: function() {
+                alert('server error occured')
+            }
+        });
+    })
+
     /*
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -285,27 +309,4 @@ const ajaxCall = () => {
     xhr.send(formData);
     */
 
-    $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8080/register',
-            method: 'post',
-            processData: false,
-            contentType: false,
-            data: formData,
-            enctype: 'multipart/form-data',
-            success: function(res) {
-                if (res.msg == 'user') {
-                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>User Already Exists</strong>
-                        </div>`
-                } else {
-                    form.submit();
-                }
-            },
-            error: function() {
-                alert('server error occured')
-            }
-        });
-    })
 }
