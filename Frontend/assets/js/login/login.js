@@ -102,39 +102,38 @@ const ajaxCall = () => {
     console.log(Object.fromEntries(formData))
 
     $(document).ready(function() {
-        $.ajax({
-            url: 'http://localhost:8080/login',
-            method: 'post',
-            processData: false,
-            contentType: false,
-            data: formData,
-            enctype: 'multipart/form-data',
-            success: function(res) {
-                if (res.msg == 'email') {
-                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+            $.ajax({
+                url: 'http://localhost:8080/login',
+                method: 'post',
+                processData: false,
+                contentType: false,
+                data: formData,
+                enctype: 'multipart/form-data',
+                success: function(res) {
+                    if (res.msg == 'email') {
+                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>User Doesn't Exists</strong>
                     </div>`
 
-                } else if (res.msg == 'password') {
-                    warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
+                    } else if (res.msg == 'password') {
+                        warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>Password Incorrect</strong>
                     </div>`
-                } else {
-                    //form.submit();
-                    //XMLHttpRequest.setRequestHeader("x-auth-token", res.token)
-                    // let header = new Headers();
-                    // header.append('x-auth-token', res.token)
-                    // console.log(header.get('x-auth-token'));
-                    localStorage.setItem("x-auth-token", res.token);
-                    form.submit();
-                }
-            },
-        });
-    })
-    xhr = new XMLHttpRequest();
-    xhr.setRequestHeader(header, value)
+                    } else {
+                        //form.submit();
+                        //XMLHttpRequest.setRequestHeader("x-auth-token", res.token)
+                        // let header = new Headers();
+                        // header.append('x-auth-token', res.token)
+                        // console.log(header.get('x-auth-token'));
+                        localStorage.setItem("x-auth-token", res.token);
+
+                        form.submit();
+                    }
+                },
+            });
+        })
         /*
         xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://localhost:8080/login');
