@@ -1,0 +1,12 @@
+.card {
+    margin: 0 auto;
+    margin-top: 5%;
+    padding-top: 2%;
+    width: 50vw;
+}
+
+.card-img-top {
+    margin: 0 auto;
+    max-width: 200px;
+    height: auto;
+}

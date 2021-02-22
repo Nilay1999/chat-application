@@ -1,7 +1,8 @@
-var row = document.querySelector('tbody');
+var row = document.querySelector('.table');
 
 $('#logout').on('click', function() {
     localStorage.removeItem('x-auth-token');
+    localStorage.removeItem('id');
     window.location = 'login.html';
 })
 
@@ -15,8 +16,8 @@ $(document).ready(function() {
             var couter = '0';
             for (let user of Users) {
                 couter++;
-                userRow += `<tr>
-                                <th scope="row">${couter}</th>
+                userRow += `<tr class="text-center" id="data">
+                                <td>${couter}</td>
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
                                 <td>${user.phone}</td>
