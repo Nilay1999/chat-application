@@ -21,6 +21,9 @@ $(document).ready(function() {
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
                                 <td>${user.phone}</td>
+                                <td><button class="btn btn-info mr-2" id="addFriend" onclick="addFriend('${user._id}')">Add Friend</button>
+                                    <button class="btn btn-warning" id="viewProfile" onclick="viewProfile('${user._id}')">View Profile</button>
+                                </td>
                             </tr>`
             }
             row.innerHTML = userRow;
@@ -34,4 +37,27 @@ $(document).ready(function() {
             }
         }
     })
+
+
 })
+
+function addFriend(id) {
+    $(document).ready(function() {
+        $.ajax({
+            url: `http://localhost:8080/addFriend/:${id}`,
+            method: 'post',
+            success: function() {
+
+            },
+            error: function() {
+
+            }
+        })
+    })
+}
+
+
+function viewProfile(id) {
+    localStorage.setItem('profile-id', id);
+    window.location = "viewProfile.html"
+}
