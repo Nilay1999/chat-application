@@ -37,31 +37,4 @@ $(document).ready(function() {
             }
         }
     })
-
-
 })
-
-function addFriend(id) {
-    const senderId = localStorage.getItem('id');
-    $(document).ready(function() {
-        $.ajax({
-            url: `http://localhost:8080/addFriend/${id}`,
-            method: 'post',
-            data: {
-                '_id': senderId
-            },
-            success: function(responce) {
-                alert(responce.msg)
-            },
-            error: function() {
-                alert("Server Error")
-            }
-        })
-    })
-}
-
-
-function viewProfile(id) {
-    localStorage.setItem('profile-id', id);
-    window.location = "viewProfile.html"
-}

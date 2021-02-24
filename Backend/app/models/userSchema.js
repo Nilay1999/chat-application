@@ -27,10 +27,20 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    img:{
+    img: {
         type: String,
-        required : true
-    }
+        required: true
+    },
+    friend: [{
+        sender: {
+            type: mongoose.Schema.Types.ObjectId,
+            default: null
+        },
+        pendingRequest: {
+            type: Boolean,
+            default: true
+        }
+    }]
 });
 
 const User = mongoose.model('User', userSchema);
