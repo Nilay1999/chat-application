@@ -34,11 +34,17 @@ const userSchema = new Schema({
     friend: [{
         sender: {
             type: mongoose.Schema.Types.ObjectId,
-            default: null
+        },
+        senderEmail: {
+            type: String
         },
         pendingRequest: {
             type: Boolean,
-            default: true
+        }
+    }],
+    friendList: [{
+        friendId: {
+            mtype: mongoose.Schema.Types.ObjectId
         }
     }]
 });

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 exports.register = (req, res) => {
 
     var { email, password, userName, firstName, lastName, phone } = req.body;
-    var img = req.file.path;
+    var img = req.file.filename;
 
     user.findOne({ email: email }, function(err, data) {
         if (data) {

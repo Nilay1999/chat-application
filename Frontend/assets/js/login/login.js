@@ -122,6 +122,7 @@ const ajaxCall = () => {
             success: function(res) {
                 localStorage.setItem("x-auth-token", res.token);
                 localStorage.setItem("id", res.user.id);
+                localStorage.setItem("email", res.user.email);
                 form.submit();
             },
         });

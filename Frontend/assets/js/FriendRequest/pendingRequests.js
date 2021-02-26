@@ -1,4 +1,7 @@
+const User = require("../../../../Backend/app/models/userSchema");
+
 var row = document.querySelector('.table');
+const senderId = localStorage.getItem('id');
 
 $('#logout').on('click', function() {
     localStorage.removeItem('x-auth-token');
@@ -8,25 +11,13 @@ $('#logout').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:8080/home',
-        method: 'get',
+        url: `http://localhost:8080/requestAction`,
+        method: 'post',
+        data: { '_id': senderId },
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(Users) {
-            let userRow = '';
-            var couter = '0';
-            for (let user of Users) {
-                couter++;
-                userRow += `<tr class="text-center" id="data">
-                                <td>${couter}</td>
-                                <td>${user.email}</td>
-                                <td>${user.userName}</td>
-                                <td>${user.phone}</td>
-                                <td><button class="btn btn-info mr-2" id="addFriend" onclick="addFriend('${user._id}')">Add Friend</button>
-                                    <button class="btn btn-warning" id="viewProfile" onclick="viewProfile('${user._id}')">View Profile</button>
-                                </td>
-                            </tr>`
-            }
-            row.innerHTML = userRow;
+            console.log(Users)
+
         },
         error: function(xhr, status, error) {
             if (!localStorage.getItem('x-auth-toke')) {

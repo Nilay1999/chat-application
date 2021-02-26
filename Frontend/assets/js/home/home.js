@@ -43,12 +43,14 @@ $(document).ready(function() {
 
 function addFriend(id) {
     const senderId = localStorage.getItem('id');
+    const email = localStorage.getItem('email')
     $(document).ready(function() {
         $.ajax({
             url: `http://localhost:8080/addFriend/${id}`,
             method: 'post',
             data: {
-                '_id': senderId
+                '_id': senderId,
+                'email': email
             },
             success: function(responce) {
                 alert(responce.msg)
