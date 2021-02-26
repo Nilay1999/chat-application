@@ -14,7 +14,7 @@ exports.addFriend = (req, res) => {
                     friend: [{
                         sender: senderId,
                         senderEmail: email,
-                        pending: true
+                        pendingRequest: true
                     }]
                 }
             }, (err, data) => {

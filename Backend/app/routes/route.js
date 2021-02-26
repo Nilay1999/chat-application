@@ -24,6 +24,8 @@ routes.post('/profile/:id', auth, profileController.profile)
 
 routes.post('/addFriend/:id', addFriendController.addFriend)
 
-routes.post('/requestAction', requestActionController.action)
+routes.post('/pendingRequest', requestActionController.pendingRequest)
+
+routes.post('/acceptRequest/:id', requestActionController.acceptRequest)
 
 module.exports = routes;
