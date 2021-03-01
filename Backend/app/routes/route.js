@@ -28,4 +28,8 @@ routes.post('/pendingRequest', requestActionController.pendingRequest)
 
 routes.post('/acceptRequest/:id', requestActionController.acceptRequest)
 
+routes.post('/rejectRequest/:id', requestActionController.rejectRequest)
+
+routes.post('/friendList', auth, requestActionController.friendList)
+
 module.exports = routes;

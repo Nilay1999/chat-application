@@ -14,7 +14,7 @@ $(document).ready(function() {
         method: 'post',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(User) {
-            console.log(User.password);
+            console.log(User.img);
             let cardData =
                 `<img class="card-img-top" src="../../Backend/app/uploads/${User.img}" alt="Card image cap">
                 <div class="card-body">
