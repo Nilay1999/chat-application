@@ -41,6 +41,28 @@ exports.acceptRequest = (req, res) => {
             })
         }
     })
+
+    User.findOne({ _id: friendId, 'friendList.friendId': senderId }, (err, data) => {
+        if (err) {
+            res.json(err)
+        } else if (data) {
+            res.json({ msg: "Friend Request Already Accepted" })
+        } else {
+            User.findByIdAndUpdate(friendId, {
+                $push: {
+                    friendList: [{
+                        friendId: senderId
+                    }]
+                }
+            }, (err, list) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(list)
+                }
+            })
+        }
+    })
 }
 
 exports.rejectRequest = (req, res) => {
