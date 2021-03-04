@@ -58,7 +58,7 @@ exports.acceptRequest = (req, res) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    console.log(list)
+                    console.log("success")
                 }
             })
         }
@@ -92,7 +92,7 @@ exports.friendList = (req, res) => {
         })
 
         User.find({ _id: id }, (err, data) => {
-            res.json(data)
+            res.json("Ready")
         })
     })
 }

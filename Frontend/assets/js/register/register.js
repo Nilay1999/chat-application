@@ -1,3 +1,9 @@
+$(".gambar").attr("src", "https://user.gadjian.com/static/images/personnel_boy.png");
+var $uploadCrop,
+    tempFilename,
+    rawImg,
+    imageId;
+var base64;
 const usernameEl = document.querySelector('#username');
 const emailEl = document.querySelector('#email');
 const passwordEl = document.querySelector('#pass1');
@@ -279,34 +285,54 @@ const ajaxCall = () => {
             }
         });
     })
-
-    /*
-    xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText == 'user'){
-                warning.innerHTML = `<div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>User Already Exists</strong>
-                </div>`
-                console.log(this.responseText)
-                
-            }
-            else{
-                
-                const response = JSON.parse(this.responseText);
-                //const data = {"username":response.userName,"email":response.email};
-                //xhr.open('POST', 'http://localhost:8080/index');
-                //xhr.setRequestHeader('Content-Type', 'application/json');
-                //xhr.send(data);
-                console.log(response._id);
-                form.submit();
-            }
-        }
-    };
-  
-    xhr.open('POST', 'http://localhost:8080/register');
-    xhr.send(formData);
-    */
-
 }
+
+
+function readFile(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.upload-demo').addClass('ready');
+            $('#cropImagePop').modal('show');
+            rawImg = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$uploadCrop = $('#upload-demo').croppie({
+    viewport: {
+        width: 150,
+        height: 200,
+    },
+    enforceBoundary: false,
+    enableExif: true
+});
+$('#cropImagePop').on('shown.bs.modal', function() {
+
+    $uploadCrop.croppie('bind', {
+        url: rawImg
+    }).then(function() {
+        console.log('jQuery bind complete');
+    });
+});
+
+$('.item-img').on('change', function() {
+    imageId = $(this).data('id');
+    tempFilename = $(this).val();
+    $('#cancelCropBtn').data('id', imageId);
+    readFile(this);
+});
+
+$('#cropImageBtn').on('click', function(ev) {
+    $uploadCrop.croppie('result', {
+        type: 'base64',
+        format: 'jpeg',
+        size: { width: 150, height: 200 }
+    }).then(function(resp) {
+        $('#item-img-output').attr('src', resp);
+        $('#cropImagePop').modal('hide');
+        base64 = resp;
+        console.log(base64)
+    });
+});
