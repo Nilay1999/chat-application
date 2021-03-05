@@ -78,7 +78,7 @@ exports.rejectRequest = (req, res) => {
                     "friend": { "sender": friendId }
                 }
             }, (err, success) => {
-                res.json(success)
+                res.json(data)
             })
         }
     })
@@ -92,7 +92,7 @@ exports.friendList = (req, res) => {
         })
 
         User.find({ _id: id }, (err, data) => {
-            res.json("Ready")
+            res.json(data)
         })
     })
 }
