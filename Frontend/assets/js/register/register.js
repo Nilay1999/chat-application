@@ -258,7 +258,7 @@ const ajaxCall = () => {
     formData.append('lastName', lnameEl.value);
     formData.append('password', passwordEl.value);
     formData.append('phone', phoneEl.value);
-    formData.append('img', file)
+    formData.append('img', base64)
 
     console.log(Object.fromEntries(formData))
 
@@ -332,7 +332,8 @@ $('#cropImageBtn').on('click', function(ev) {
     }).then(function(resp) {
         $('#item-img-output').attr('src', resp);
         $('#cropImagePop').modal('hide');
+
         base64 = resp;
-        console.log(base64)
+
     });
 });
