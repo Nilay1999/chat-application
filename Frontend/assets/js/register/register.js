@@ -277,7 +277,7 @@ const ajaxCall = () => {
                             <strong>User Already Exists</strong>
                         </div>`
                 } else {
-                    form.submit();
+                    location.href = "home.html"
                 }
             },
             error: function() {

@@ -3,6 +3,7 @@ const passwordEl = document.querySelector('#password');
 const form = document.querySelector('#form');
 const warning = document.querySelector('#warning');
 
+
 const isRequired = value => value === '' ? false : true;
 
 const showError = (input, message) => {
@@ -100,7 +101,6 @@ const ajaxCall = () => {
         password: $("#password").val(),
     }
 
-
     $(document).ready(function() {
         $.ajax({
             url: 'http://localhost:8080/login',
@@ -123,7 +123,7 @@ const ajaxCall = () => {
                 localStorage.setItem("x-auth-token", res.token);
                 localStorage.setItem("id", res.user.id);
                 localStorage.setItem("email", res.user.email);
-                form.submit();
+                location.href = "home.html"
             },
         });
     })
