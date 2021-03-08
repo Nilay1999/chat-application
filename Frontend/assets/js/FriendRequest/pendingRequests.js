@@ -8,9 +8,13 @@ $('#logout').on('click', function() {
     window.location = 'login.html';
 })
 
+$('#notification').on('click', function() {
+    location.href = "notification.html"
+})
+
 $(document).ready(function() {
     $.ajax({
-        url: `http://localhost:8080/pendingRequest`,
+        url: `http://localhost:3000/pendingRequest`,
         method: 'post',
         data: { '_id': senderId },
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },

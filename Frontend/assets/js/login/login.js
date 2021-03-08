@@ -103,7 +103,7 @@ const ajaxCall = () => {
 
     $(document).ready(function() {
         $.ajax({
-            url: 'http://localhost:8080/login',
+            url: 'http://localhost:3000/login',
             method: 'post',
             dataType: 'json',
             contentType: 'application/json',

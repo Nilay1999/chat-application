@@ -264,7 +264,7 @@ const ajaxCall = () => {
 
     $(document).ready(function() {
         $.ajax({
-            url: 'http://localhost:8080/register',
+            url: 'http://localhost:3000/register',
             method: 'post',
             processData: false,
             contentType: false,

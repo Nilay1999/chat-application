@@ -7,9 +7,13 @@ $('#logout').on('click', function() {
     window.location = 'login.html';
 })
 
+$('#notification').on('click', function() {
+    location.href = "notification.html"
+})
+
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:8080/friendList',
+        url: 'http://localhost:3000/friendList',
         method: 'post',
         data: {
             userId: localStorage.getItem('id'),

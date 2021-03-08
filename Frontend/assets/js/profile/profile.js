@@ -1,6 +1,10 @@
 const card = document.querySelector('.card');
 const id = localStorage.getItem('id');
 
+$('#notification').on('click', function() {
+    location.href = "notification.html"
+})
+
 $('#logout').on('click', function() {
     localStorage.removeItem('x-auth-token');
     localStorage.removeItem('id');
@@ -10,7 +14,7 @@ $('#logout').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: `http://localhost:8080/profile/${id}`,
+        url: `http://localhost:3000/profile/${id}`,
         method: 'post',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(User) {

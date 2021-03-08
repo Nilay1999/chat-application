@@ -9,11 +9,14 @@ $('#logout').on('click', function() {
     window.location = 'login.html';
 })
 
+$('#notification').on('click', function() {
+    location.href = "notification.html"
+})
 
 $(document).ready(function() {
     console.log(id)
     $.ajax({
-        url: `http://localhost:8080/profile/${id}`,
+        url: `http://localhost:3000/profile/${id}`,
         method: 'post',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(User) {

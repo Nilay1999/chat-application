@@ -1,5 +1,9 @@
 var row = document.querySelector('.table');
 
+$('#notification').on('click', function() {
+    location.href = "notification.html"
+})
+
 $('#logout').on('click', function() {
     localStorage.removeItem('x-auth-token');
     localStorage.removeItem('id');
@@ -9,7 +13,7 @@ $('#logout').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:8080/home',
+        url: 'http://localhost:3000/home',
         method: 'get',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(Users) {
@@ -47,7 +51,7 @@ function addFriend(id) {
     const email = localStorage.getItem('email')
     $(document).ready(function() {
         $.ajax({
-            url: `http://localhost:8080/addFriend/${id}`,
+            url: `http://localhost:3000/addFriend/${id}`,
             method: 'post',
             data: {
                 '_id': senderId,
