@@ -22,7 +22,7 @@ app.use(cors({ origin: 'http://localhost:5500' }));
 app.use('/', routes);
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log(socket.id + " : connected");
 });
 http.listen(PORT, () => {
     console.log(`Server running at Port : ${PORT}`);
