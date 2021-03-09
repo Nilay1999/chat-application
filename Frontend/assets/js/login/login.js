@@ -4,6 +4,9 @@ const form = document.querySelector('#form');
 const warning = document.querySelector('#warning');
 
 
+var socket = io('http://localhost:3000', { transport: ['websocket'] });
+
+
 const isRequired = value => value === '' ? false : true;
 
 const showError = (input, message) => {
