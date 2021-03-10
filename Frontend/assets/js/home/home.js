@@ -1,6 +1,8 @@
 var row = document.querySelector('.table');
 var socket = io('http://localhost:3000', { transport: ['websocket'] });
-
+socket.on('newclientconnect', function(data) {
+    console.log(data.description)
+});
 $('#notification').on('click', function() {
     location.href = "notification.html"
 })
@@ -48,7 +50,6 @@ $(document).ready(function() {
 })
 
 function addFriend(id) {
-
     const senderId = localStorage.getItem('id');
     const email = localStorage.getItem('email');
     $(document).ready(function() {
@@ -61,12 +62,14 @@ function addFriend(id) {
             },
             success: function(responce) {
                 alert(responce.msg)
+
             },
             error: function() {
                 alert("Server Error")
             }
         })
     })
+
 }
 
 

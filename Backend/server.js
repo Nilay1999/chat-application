@@ -22,25 +22,18 @@ app.use(cors({ origin: 'http://localhost:5500' }));
 app.use('/', routes);
 app.set('socketio', io)
 
+var clients = 0;
 io.on('connection', function(socket) {
-    console.log("============start-session event================")
-    console.log(data)
-    if (data.sessionId == null) {
-        var session_id = uuidv4(); //generating the sessions_id and then binding that socket to that sessions 
-        socket.room = session_id;
-        socket.join(socket.room, function(res) {
-            console.log("joined successfully ")
-            socket.emit("set-session-acknowledgement", { sessionId: session_id })
-        })
-    } else {
-        socket.room = data.sessionId; //this time using the same session 
-        socket.join(socket.room, function(res) {
-            console.log("joined successfully ")
-            socket.emit("set-session-acknowledgement", { sessionId: data.sessionId })
-        })
-    }
-})
-
+    clients++;
+    console.log(socket.id)
+    socket.emit('newclientconnect', { description: 'Hey, welcome!' });
+    socket.broadcast.emit('newclientconnect', { description: clients + ' clients connected!' })
+    socket.on('disconnect', function() {
+        clients--;
+        socket.broadcast.emit('newclientconnect', { description: clients + ' clients connected!' })
+        console.log(socket.id + " : Disconnected ")
+    });
+});
 
 
 http.listen(PORT, () => {
