@@ -24,6 +24,7 @@ exports.addFriend = (req, res) => {
                     res.json({ msg: 'Friend Request Sent' })
                 }
             })
+
         }
     })
 }

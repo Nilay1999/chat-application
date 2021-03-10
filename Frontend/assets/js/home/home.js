@@ -1,4 +1,5 @@
 var row = document.querySelector('.table');
+var socket = io('http://localhost:3000', { transport: ['websocket'] });
 
 $('#notification').on('click', function() {
     location.href = "notification.html"
@@ -13,7 +14,7 @@ $('#logout').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:3000/home',
+        url: `${url}/home`,
         method: 'get',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(Users) {
@@ -47,11 +48,12 @@ $(document).ready(function() {
 })
 
 function addFriend(id) {
+
     const senderId = localStorage.getItem('id');
-    const email = localStorage.getItem('email')
+    const email = localStorage.getItem('email');
     $(document).ready(function() {
         $.ajax({
-            url: `http://localhost:3000/addFriend/${id}`,
+            url: `${url}/addFriend/${id}`,
             method: 'post',
             data: {
                 '_id': senderId,

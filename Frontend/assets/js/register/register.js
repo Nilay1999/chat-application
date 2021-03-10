@@ -264,7 +264,7 @@ const ajaxCall = () => {
 
     $(document).ready(function() {
         $.ajax({
-            url: 'http://localhost:3000/register',
+            url: `${url}/register`,
             method: 'post',
             processData: false,
             contentType: false,
@@ -277,7 +277,7 @@ const ajaxCall = () => {
                             <strong>User Already Exists</strong>
                         </div>`
                 } else {
-                    location.href = "home.html"
+                    location.href = "login.html"
                 }
             },
             error: function() {

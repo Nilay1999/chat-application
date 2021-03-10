@@ -6,6 +6,9 @@ const warning = document.querySelector('#warning');
 
 var socket = io('http://localhost:3000', { transport: ['websocket'] });
 
+socket.on("set-session-acknowledgement", function(data) {
+    sessionStorage.setItem('sessionId', data.sessionId);
+})
 
 const isRequired = value => value === '' ? false : true;
 
@@ -106,7 +109,7 @@ const ajaxCall = () => {
 
     $(document).ready(function() {
         $.ajax({
-            url: 'http://localhost:3000/login',
+            url: `${url}/login`,
             method: 'post',
             dataType: 'json',
             contentType: 'application/json',

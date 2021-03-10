@@ -14,7 +14,7 @@ $('#logout').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: `http://localhost:3000/profile/${id}`,
+        url: `${url}/profile/${id}`,
         method: 'post',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(User) {

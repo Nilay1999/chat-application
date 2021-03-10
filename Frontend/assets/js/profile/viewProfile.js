@@ -16,7 +16,7 @@ $('#notification').on('click', function() {
 $(document).ready(function() {
     console.log(id)
     $.ajax({
-        url: `http://localhost:3000/profile/${id}`,
+        url: `${url}/profile/${id}`,
         method: 'post',
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(User) {

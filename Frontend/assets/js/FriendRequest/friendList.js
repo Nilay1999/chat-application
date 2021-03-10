@@ -13,7 +13,7 @@ $('#notification').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:3000/friendList',
+        url: `${url}/friendList`,
         method: 'post',
         data: {
             userId: localStorage.getItem('id'),

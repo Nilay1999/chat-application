@@ -14,7 +14,7 @@ $('#notification').on('click', function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: `http://localhost:3000/pendingRequest`,
+        url: `${url}/pendingRequest`,
         method: 'post',
         data: { '_id': senderId },
         headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
@@ -53,7 +53,7 @@ $(document).ready(function() {
 function accept(id) {
     const acceptId = localStorage.getItem('id');
     $.ajax({
-        url: `http://localhost:8080/acceptRequest/${id}`,
+        url: `${url}/acceptRequest/${id}`,
         method: 'post',
         data: {
             'userId': acceptId,
@@ -72,7 +72,7 @@ function accept(id) {
 function reject(id) {
     const rejectId = localStorage.getItem('id');
     $.ajax({
-        url: `http://localhost:8080/rejectRequest/${id}`,
+        url: `${url}/rejectRequest/${id}`,
         method: 'post',
         data: {
             'userId': rejectId
@@ -82,7 +82,7 @@ function reject(id) {
             console.log("Rejected")
         },
         error: function() {
-            console.log("Error")
+            console.log("Server Error")
         }
     })
 }
