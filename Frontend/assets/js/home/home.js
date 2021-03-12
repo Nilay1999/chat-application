@@ -1,8 +1,19 @@
 var row = document.querySelector('.table');
+const senderId = localStorage.getItem('id');
 var socket = io('http://localhost:3000', { transport: ['websocket'] });
-socket.on('newclientconnect', function(data) {
-    console.log(data.description)
-});
+
+setInterval(() => {
+    socket.emit('connecting', senderId)
+}, 500)
+
+socket.on('connected', (data) => {
+    if (data._id == senderId) {
+        notification.innerHTML = (data.notification.length);
+    }
+})
+
+var notification = document.querySelector('#Notifications');
+
 $('#notification').on('click', function() {
     location.href = "notification.html"
 })
@@ -15,6 +26,11 @@ $('#logout').on('click', function() {
 })
 
 $(document).ready(function() {
+    socket.on('Identification', (data) => {
+        if (data._id == senderId) {
+            notification.innerHTML = (data.notification.length);
+        }
+    })
     $.ajax({
         url: `${url}/home`,
         method: 'get',
@@ -45,13 +61,13 @@ $(document).ready(function() {
             }
         }
     })
-
-
 })
 
 function addFriend(id) {
-    const senderId = localStorage.getItem('id');
+
     const email = localStorage.getItem('email');
+    socket.emit('requestSend', id)
+
     $(document).ready(function() {
         $.ajax({
             url: `${url}/addFriend/${id}`,

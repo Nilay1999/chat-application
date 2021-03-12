@@ -10,6 +10,7 @@ const profileController = require('../controllers/userProfile');
 const addFriendController = require('../controllers/addFriend');
 const requestActionController = require('../controllers/requestAction')
 
+
 routes.post('/register', upload.single('img'), registerController.register);
 
 routes.post('/login', loginController.login);

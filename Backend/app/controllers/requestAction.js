@@ -14,6 +14,10 @@ exports.acceptRequest = (req, res) => {
     const senderId = req.body.userId;
     const friendId = req.params.id;
 
+    User.findById(senderId, (err, data) => {
+        senderName = data.userName
+    })
+
     User.findOne({ _id: senderId, 'friendList.friendId': friendId }, (err, data) => {
         if (err) {
             res.json(err)
@@ -52,6 +56,9 @@ exports.acceptRequest = (req, res) => {
                 $push: {
                     friendList: [{
                         friendId: senderId
+                    }],
+                    notification: [{
+                        msg: `${senderName} Accepted Your request`
                     }]
                 }
             }, (err, list) => {

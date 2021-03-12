@@ -46,6 +46,11 @@ const userSchema = new Schema({
         friendId: {
             type: mongoose.Schema.Types.ObjectId
         }
+    }],
+    notification: [{
+        msg: {
+            type: String
+        }
     }]
 });
 

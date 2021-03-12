@@ -3,6 +3,13 @@ const User = require('../models/userSchema');
 exports.addFriend = (req, res) => {
     const senderId = req.body._id;
     const email = req.body.email;
+
+    let senderName;
+    User.findById(senderId, (err, data) => {
+        senderName = data.userName
+    })
+
+
     User.findOne({ _id: req.params.id, 'friend.sender': senderId }, (err, data) => {
         if (err) {
             console.log(err)
@@ -15,6 +22,9 @@ exports.addFriend = (req, res) => {
                         sender: senderId,
                         senderEmail: email,
                         pendingRequest: true
+                    }],
+                    notification: [{
+                        msg: `${senderName} sent you a friend request`
                     }]
                 }
             }, (err, data) => {
