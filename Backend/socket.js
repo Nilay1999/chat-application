@@ -4,6 +4,7 @@ module.exports = function(io) {
     var id, userData;
     io.on('connection', (socket) => {
         console.log('User Connected ...')
+
         socket.on('requestSend', (userId) => {
             id = userId;
             setTimeout(() => {
@@ -20,5 +21,7 @@ module.exports = function(io) {
                 })
             }, 1000);
         })
+
+
     });
 };
