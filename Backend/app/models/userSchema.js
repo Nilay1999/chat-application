@@ -49,7 +49,11 @@ const userSchema = new Schema({
     }],
     notification: [{
         msg: {
-            type: String
+            type: String,
+        },
+        created_at: {
+            type: Date,
+            default: Date.now
         }
     }]
 });

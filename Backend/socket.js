@@ -3,25 +3,20 @@ const User = require('./app/models/userSchema');
 module.exports = function(io) {
     var id, userData;
     io.on('connection', (socket) => {
-        console.log('User Connected ...')
-
-        socket.on('requestSend', (userId) => {
-            id = userId;
+        socket.on('requestSend', () => {
             setTimeout(() => {
-                User.findOne({ _id: userId }).then((result) => {
-                    io.emit('Identification', result)
+                User.find({}).then((result) => {
+                    io.emit('notify', result)
                 })
             }, 1000);
         })
 
-        socket.on('connecting', (userId) => {
+        socket.on('requestMsg', () => {
             setTimeout(() => {
-                User.findOne({ _id: userId }).then((result) => {
-                    io.emit('connected', result)
+                User.find({}).then((result) => {
+                    io.emit('receiveMsg', result)
                 })
             }, 1000);
         })
-
-
     });
 };
