@@ -1,5 +1,6 @@
 var row = document.querySelector('.table');
 const senderId = localStorage.getItem('id');
+var socket = io('http://localhost:3000', { transport: ['websocket'] });
 
 $('#logout').on('click', function() {
     localStorage.removeItem('x-auth-token');
@@ -51,6 +52,8 @@ $(document).ready(function() {
 })
 
 function accept(id) {
+    socket.emit('requestSend');
+    socket.emit('requestMsg');
     const acceptId = localStorage.getItem('id');
     $.ajax({
         url: `${url}/acceptRequest/${id}`,
