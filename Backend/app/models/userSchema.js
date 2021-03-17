@@ -37,9 +37,6 @@ const userSchema = new Schema({
         },
         senderEmail: {
             type: String
-        },
-        pendingRequest: {
-            type: Boolean,
         }
     }],
     friendList: [{

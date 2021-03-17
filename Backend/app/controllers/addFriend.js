@@ -20,8 +20,7 @@ exports.addFriend = (req, res) => {
                 $push: {
                     friend: [{
                         sender: senderId,
-                        senderEmail: email,
-                        pendingRequest: true
+                        senderEmail: email
                     }],
                     notification: [{
                         msg: `${senderName} sent you a friend request`
