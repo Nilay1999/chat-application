@@ -5,10 +5,11 @@ module.exports = function(io) {
     var id;
     io.on('connection', (socket) => {
 
-        socket.on('requestSend', () => {
+
+        socket.on('requestSend', (id) => {
             let promise = new Promise(function(resolve, result) {
                 setTimeout(() => resolve(
-                    User.find({})
+                    Notification.findOne({ userId: id })
                 ), 1000)
             })
             promise.then(
@@ -20,7 +21,7 @@ module.exports = function(io) {
         socket.on('requestMsg', () => {
             let promise = new Promise(function(resolve, result) {
                 setTimeout(() => resolve(
-                    User.find({})
+                    Notification.findOne({ userId: id })
                 ), 1000)
             })
             promise.then(
@@ -29,8 +30,8 @@ module.exports = function(io) {
             );
         })
 
-        socket.on('disconnect', () => {
-            console.log(socket.id + " disconnected")
-        })
+
+
+
     });
 };

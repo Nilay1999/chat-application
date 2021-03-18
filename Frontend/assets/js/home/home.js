@@ -3,15 +3,16 @@ const senderId = localStorage.getItem('id');
 var socket = io('http://localhost:3000', { transport: ['websocket'] });
 var notification = document.querySelector('#Notifications');
 
-socket.emit('requestSend')
+socket.emit('requestSend', senderId)
 
 socket.on('notify', (data) => {
-    // console.log(data)
-    // data.forEach(element => {
-    //     if (element._id == senderId) {
-    //         notification.innerHTML = (element.notification.length);
-    //     }
-    // });
+
+    console.log(data.userId)
+        // data.forEach(element => {
+        //     if (element._id == senderId) {
+        //         notification.innerHTML = (element.notification.length);
+        //     }
+        // });
 })
 
 $('#notification').on('click', function() {
