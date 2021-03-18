@@ -8,7 +8,7 @@ const http = require('http').createServer(app);
 var io = require("socket.io")(http, {
     cors: {
         origin: "*",
-        methods: ["GET", "POST"]
+        methods: "*"
     }
 });
 io = require('./socket')(io);

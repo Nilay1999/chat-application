@@ -6,12 +6,12 @@ var notification = document.querySelector('#Notifications');
 socket.emit('requestSend')
 
 socket.on('notify', (data) => {
-    console.log(data)
-    data.forEach(element => {
-        if (element._id == senderId) {
-            notification.innerHTML = (element.notification.length);
-        }
-    });
+    // console.log(data)
+    // data.forEach(element => {
+    //     if (element._id == senderId) {
+    //         notification.innerHTML = (element.notification.length);
+    //     }
+    // });
 })
 
 $('#notification').on('click', function() {

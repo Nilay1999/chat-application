@@ -1,8 +1,9 @@
 const User = require('../models/userSchema');
+const Notification = require('../models/notification');
 
 exports.pendingRequest = (req, res) => {
     User.findOne({ _id: req.body._id }, (err, data) => {
-        if (!data) {
+        if (data.friend[0] == null) {
             res.json({ msg: "No Pending Requests" })
         } else {
             res.json(data.friend);
@@ -11,8 +12,8 @@ exports.pendingRequest = (req, res) => {
 }
 
 exports.acceptRequest = (req, res) => {
-    const senderId = req.body.userId;
-    const friendId = req.params.id;
+    var senderId = req.body.userId;
+    var friendId = req.params.id;
 
     User.findById(senderId, (err, data) => {
         senderName = data.userName
@@ -67,6 +68,31 @@ exports.acceptRequest = (req, res) => {
                 } else {
                     console.log("success")
                 }
+            })
+        }
+    })
+
+    Notification.findOne({ userId: friendId }, (err, data) => {
+        if (data) {
+            Notification.findOneAndUpdate({ userId: friendId }, {
+                $push: {
+                    msg: [{
+                        body: `${senderName} Accepted Your request`
+                    }]
+                }
+            }, (err, user) => {
+                console.log('notification push')
+            })
+        } else {
+            const newNotification = new Notification({
+                userId: friendId,
+                msg: [{
+                    body: `${senderName} Accepted Your request`
+                }]
+            })
+            newNotification.save((err, data) => {
+                if (err)
+                    throw err;
             })
         }
     })

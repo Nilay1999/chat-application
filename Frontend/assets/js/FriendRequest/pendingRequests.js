@@ -34,8 +34,7 @@ $(document).ready(function() {
                                 </tr>`
                 }
                 row.innerHTML = userRow;
-            }
-            if (Users.msg) {
+            } else {
                 row.remove();
                 document.querySelector('.info').innerHTML = `<h3 class="text-center">${Users.msg}</h3>`
             }

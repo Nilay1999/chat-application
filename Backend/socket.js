@@ -1,10 +1,10 @@
 const User = require('./app/models/userSchema');
-
-
+const Notification = require('./app/models/notification');
 
 module.exports = function(io) {
     var id;
     io.on('connection', (socket) => {
+
         socket.on('requestSend', () => {
             let promise = new Promise(function(resolve, result) {
                 setTimeout(() => resolve(
@@ -27,6 +27,10 @@ module.exports = function(io) {
                 result => io.emit('receiveMsg', result),
                 error => console.log(error)
             );
+        })
+
+        socket.on('disconnect', () => {
+            console.log(socket.id + " disconnected")
         })
     });
 };
