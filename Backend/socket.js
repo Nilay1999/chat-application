@@ -1,22 +1,32 @@
 const User = require('./app/models/userSchema');
 
+
+
 module.exports = function(io) {
-    var id, userData;
+    var id;
     io.on('connection', (socket) => {
         socket.on('requestSend', () => {
-            setTimeout(() => {
-                User.find({}).then((result) => {
-                    io.emit('notify', result)
-                })
-            }, 1000);
+            let promise = new Promise(function(resolve, result) {
+                setTimeout(() => resolve(
+                    User.find({})
+                ), 1000)
+            })
+            promise.then(
+                result => io.emit('notify', result),
+                error => console.log(error)
+            );
         })
 
         socket.on('requestMsg', () => {
-            setTimeout(() => {
-                User.find({}).then((result) => {
-                    io.emit('receiveMsg', result)
-                })
-            }, 1000);
+            let promise = new Promise(function(resolve, result) {
+                setTimeout(() => resolve(
+                    User.find({})
+                ), 1000)
+            })
+            promise.then(
+                result => io.emit('receiveMsg', result),
+                error => console.log(error)
+            );
         })
     });
 };

@@ -1,7 +1,7 @@
 const User = require('../models/userSchema');
 
 exports.pendingRequest = (req, res) => {
-    User.findOne({ _id: req.body._id, 'friend.pendingRequest': true }, (err, data) => {
+    User.findOne({ _id: req.body._id }, (err, data) => {
         if (!data) {
             res.json({ msg: "No Pending Requests" })
         } else {
