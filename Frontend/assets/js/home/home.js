@@ -3,16 +3,21 @@ const senderId = localStorage.getItem('id');
 var socket = io('http://localhost:3000', { transport: ['websocket'] });
 var notification = document.querySelector('#Notifications');
 
-socket.emit('requestSend', senderId)
+socket.emit('userConnected', senderId)
 
 socket.on('notify', (data) => {
 
-    console.log(data.userId)
-        // data.forEach(element => {
-        //     if (element._id == senderId) {
-        //         notification.innerHTML = (element.notification.length);
-        //     }
-        // });
+    var messages = [];
+    if (data == null) {
+        notification.innerHTML = 0;
+    } else {
+        data.msg.forEach(element => {
+            if (element.read == false) {
+                messages.push(element);
+            }
+        });
+    }
+    notification.innerHTML = messages.length;
 })
 
 $('#notification').on('click', function() {
@@ -27,11 +32,7 @@ $('#logout').on('click', function() {
 })
 
 $(document).ready(function() {
-    socket.on('Identification', (data) => {
-        if (data._id == senderId) {
-            notification.innerHTML = (data.notification.length);
-        }
-    })
+
     $.ajax({
         url: `${url}/home`,
         method: 'get',
@@ -67,8 +68,8 @@ $(document).ready(function() {
 function addFriend(id) {
 
     const email = localStorage.getItem('email');
-    socket.emit('requestSend');
-    socket.emit('requestMsg');
+    socket.emit('requestSend', id)
+    socket.emit('requestMsg', id);
 
     $(document).ready(function() {
         $.ajax({

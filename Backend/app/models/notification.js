@@ -13,6 +13,10 @@ const notification = new Schema({
         created_At: {
             type: Date,
             default: Date.now
+        },
+        read: {
+            type: Boolean,
+            default: false
         }
     }]
 })

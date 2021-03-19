@@ -9,7 +9,7 @@ const homeController = require('../controllers/userHome');
 const profileController = require('../controllers/userProfile');
 const addFriendController = require('../controllers/addFriend');
 const requestActionController = require('../controllers/requestAction')
-
+const notificationController = require('../controllers/readNotification')
 
 routes.post('/register', upload.single('img'), registerController.register);
 
@@ -32,5 +32,7 @@ routes.post('/acceptRequest/:id', requestActionController.acceptRequest)
 routes.post('/rejectRequest/:id', requestActionController.rejectRequest)
 
 routes.post('/friendList', auth, requestActionController.friendList)
+
+routes.post('/readNotification', notificationController.readNotification)
 
 module.exports = routes;

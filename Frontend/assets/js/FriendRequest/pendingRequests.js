@@ -51,8 +51,9 @@ $(document).ready(function() {
 })
 
 function accept(id) {
-    socket.emit('requestSend');
-    socket.emit('requestMsg');
+    socket.emit('requestSend', id)
+    socket.emit('requestMsg', id)
+
     const acceptId = localStorage.getItem('id');
     $.ajax({
         url: `${url}/acceptRequest/${id}`,
