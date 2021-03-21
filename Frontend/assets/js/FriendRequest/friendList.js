@@ -29,7 +29,7 @@ $(document).ready(function() {
                                 <td>${couter}</td>
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
-                                <td>${user.phone}</td>
+                                <td><button class="btn btn-info mr-2" id="Message" onclick="message('${user._id}')">Add Friend</button></td>
                             </tr>`
             }
             row.innerHTML = userRow;
@@ -44,5 +44,8 @@ $(document).ready(function() {
         }
     })
 
+    function message(id) {
+        console.log(id)
+    }
 
 })
