@@ -10,6 +10,7 @@ const profileController = require('../controllers/userProfile');
 const addFriendController = require('../controllers/addFriend');
 const requestActionController = require('../controllers/requestAction')
 const notificationController = require('../controllers/readNotification')
+const createConvController = require('../controllers/createConversation')
 
 routes.post('/register', upload.single('img'), registerController.register);
 
@@ -34,5 +35,7 @@ routes.post('/rejectRequest/:id', requestActionController.rejectRequest)
 routes.post('/friendList', auth, requestActionController.friendList)
 
 routes.post('/readNotification', notificationController.readNotification)
+
+routes.post('/createConv', createConvController.createConv)
 
 module.exports = routes;
