@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ConversationSchema = new Schema({
     participants: [{
-        type: Mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }]
 });

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../assets/css/chatRoom.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pendingRequests.html">Friend Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="friendList.html">Friend List</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <section class="chat__section">
+        <div class="brand">
+
+            <h1>Chat Room</h1>
+        </div>
+        <div class="message__area"></div>
+        <div class="input-group input-group-lg">
+            <input type="text" id="text-chat" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Write Something ...">
+            <div class="input-group-append">
+                <Button class="btn btn-default"><i class="fa fa-paper-plane"></i></Button>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="../assets/js/common/socket.io.js"></script>
+    <script src="../assets/js/common/url.js"></script>
+    <script type="text/javascript" src="../assets/js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../assets/js/common/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -29,7 +29,7 @@ $(document).ready(function() {
                                 <td>${couter}</td>
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
-                                <td><button class="btn btn-info mr-2" id="Message" onclick="message('${user._id}')">Add Friend</button></td>
+                                <td><button class="btn btn-info mr-2" id="Message" onclick="message('${user._id}')">Message</button></td>
                             </tr>`
             }
             row.innerHTML = userRow;
@@ -43,9 +43,21 @@ $(document).ready(function() {
             }
         }
     })
-
-    function message(id) {
-        console.log(id)
-    }
-
 })
+
+function message(id) {
+    $.ajax({
+        url: `${url}/createConv/${id}`,
+        method: 'post',
+        data: {
+            id: localStorage.getItem('id'),
+        },
+        success: function(response) {
+            console.log(response)
+            window.location = "chatRoom.html";
+        },
+        error: function(xhr, status, error) {
+            alert('server Error')
+        }
+    })
+}

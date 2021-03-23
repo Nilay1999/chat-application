@@ -1,9 +1,10 @@
 const express = require('express');
 const routes = express.Router();
-const registerController = require('../controllers/registerUser');
-const loginController = require('../controllers/loginUser');
 const upload = require('../middleware/multer');
 const auth = require('../middleware/auth');
+
+const registerController = require('../controllers/registerUser');
+const loginController = require('../controllers/loginUser');
 const deleteController = require('../controllers/deleteUser');
 const homeController = require('../controllers/userHome');
 const profileController = require('../controllers/userProfile');
@@ -11,6 +12,8 @@ const addFriendController = require('../controllers/addFriend');
 const requestActionController = require('../controllers/requestAction')
 const notificationController = require('../controllers/readNotification')
 const createConvController = require('../controllers/createConversation')
+const messageController = require('../controllers/messageAction');
+
 
 routes.post('/register', upload.single('img'), registerController.register);
 
@@ -36,6 +39,8 @@ routes.post('/friendList', auth, requestActionController.friendList)
 
 routes.post('/readNotification', notificationController.readNotification)
 
-routes.post('/createConv', createConvController.createConv)
+routes.post('/createConv/:id', createConvController.createConv)
+
+routes.post('/addMsg', messageController.addMessage)
 
 module.exports = routes;
