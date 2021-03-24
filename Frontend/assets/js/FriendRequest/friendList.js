@@ -53,7 +53,7 @@ function message(id) {
             id: localStorage.getItem('id'),
         },
         success: function(response) {
-            console.log(response)
+            sessionStorage.setItem('convId', response.id)
             window.location = "chatRoom.html";
         },
         error: function(xhr, status, error) {

@@ -9,13 +9,13 @@ exports.createConv = (req, res) => {
         if (err)
             return res.send(err)
         if (conversation1 != null) {
-            return res.send("Conversation Already Exist");
+            res.json({ id: conversation1._id })
         } else {
             Conversation.findOne({ participants: [receiverId, userId] }, (err, conversation2) => {
                 if (err)
                     return res.send(err)
                 if (conversation2 != null) {
-                    return res.send("Conversation Already Exist");
+                    res.json({ id: conversation2._id })
                 } else {
                     const conv = new Conversation({
                         participants: [userId, receiverId]
@@ -24,7 +24,7 @@ exports.createConv = (req, res) => {
                         if (err) {
                             res.send(err)
                         } else {
-                            res.json({ msg })
+                            res.json({ id: msg._id })
                         }
                     })
                 }

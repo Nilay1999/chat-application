@@ -43,4 +43,6 @@ routes.post('/createConv/:id', createConvController.createConv)
 
 routes.post('/addMsg', messageController.addMessage)
 
+routes.post('/getConversation', messageController.getConversation)
+
 module.exports = routes;

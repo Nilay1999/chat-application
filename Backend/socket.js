@@ -55,5 +55,9 @@ module.exports = function(io) {
                 error => console.log(error)
             );
         })
+
+        socket.on('refreshChat', (convId) => {
+            io.emit('loadChat')
+        })
     });
 };
