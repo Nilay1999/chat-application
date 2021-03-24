@@ -42,6 +42,7 @@ function appendToDom(msg) {
         data: {
             id: id
         },
+
         success: function(res) {
             console.log("success")
         },

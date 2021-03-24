@@ -79,6 +79,7 @@ function addFriend(id) {
                 '_id': senderId,
                 'email': email
             },
+            headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
             success: function(responce) {
                 alert(responce.msg)
 

@@ -27,7 +27,7 @@ routes.get('/logout', loginController.logout);
 
 routes.post('/profile/:id', auth, profileController.profile)
 
-routes.post('/addFriend/:id', addFriendController.addFriend)
+routes.post('/addFriend/:id', auth, addFriendController.addFriend)
 
 routes.post('/pendingRequest', requestActionController.pendingRequest)
 
@@ -43,6 +43,6 @@ routes.post('/createConv/:id', createConvController.createConv)
 
 routes.post('/addMsg', messageController.addMessage)
 
-routes.post('/getConversation', messageController.getConversation)
+routes.post('/getConversation', auth, messageController.getConversation)
 
 module.exports = routes;

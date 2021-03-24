@@ -20,6 +20,7 @@ window.onload = function msgLoad() {
         data: {
             convId: convId,
         },
+        headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(response) {
             console.log(response);
             response.forEach(i => {
@@ -59,6 +60,7 @@ function sendMessage(message) {
             userId: userId,
             msgBody: message
         },
+        headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
         success: function(response) {
             console.log(message);
         },
