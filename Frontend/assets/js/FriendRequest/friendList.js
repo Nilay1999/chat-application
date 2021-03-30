@@ -1,28 +1,28 @@
-var row = document.querySelector('.table');
+var row = document.querySelector("#friend-list");
 
-$('#logout').on('click', function() {
-    localStorage.removeItem('x-auth-token');
-    localStorage.removeItem('id');
-    localStorage.removeItem('email');
-    window.location = 'login.html';
-})
+$("#logout").on("click", function() {
+    localStorage.removeItem("x-auth-token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("email");
+    window.location = "login.html";
+});
 
-$('#notification').on('click', function() {
-    location.href = "notification.html"
-})
+$("#notification").on("click", function() {
+    location.href = "notification.html";
+});
 
 $(document).ready(function() {
     $.ajax({
         url: `${url}/friendList`,
-        method: 'post',
+        method: "post",
         data: {
-            userId: localStorage.getItem('id'),
+            userId: localStorage.getItem("id"),
         },
-        headers: { "x-auth-token": localStorage.getItem('x-auth-token') },
+        headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
         success: function(Users) {
-            console.log(Users)
-            let userRow = '';
-            var couter = '0';
+            console.log(Users);
+            let userRow = "";
+            var couter = "0";
             for (let user of Users) {
                 couter++;
                 userRow += `<tr class="text-center" id="data">
@@ -30,34 +30,35 @@ $(document).ready(function() {
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
                                 <td><button class="btn btn-info mr-2" id="Message" onclick="message('${user._id}')">Message</button></td>
-                            </tr>`
+                            </tr>`;
             }
             row.innerHTML = userRow;
         },
         error: function(xhr, status, error) {
-            if (!localStorage.getItem('x-auth-token')) {
-                alert('No token');
-                window.location = 'login.html';
+            if (!localStorage.getItem("x-auth-token")) {
+                alert("No token");
+                window.location = "login.html";
             } else {
-                alert('server Error')
+                alert("server Error");
             }
-        }
-    })
-})
+        },
+    });
+});
 
 function message(id) {
     $.ajax({
         url: `${url}/createConv/${id}`,
-        method: 'post',
+        method: "post",
         data: {
-            id: localStorage.getItem('id'),
+            id: localStorage.getItem("id"),
         },
         success: function(response) {
-            sessionStorage.setItem('convId', response.id)
+            sessionStorage.setItem("convId", response.id);
+            sessionStorage.setItem("userName", response.userName);
             window.location = "chatRoom.html";
         },
         error: function(xhr, status, error) {
-            alert('server Error')
-        }
-    })
+            alert("server Error");
+        },
+    });
 }
