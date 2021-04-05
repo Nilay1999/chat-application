@@ -1,6 +1,6 @@
 var input = document.getElementById("upload");
 var infoArea = document.getElementById("upload-label");
-var textArea = document.getElementById("desc");
+var desc = document.getElementById("description");
 const form = document.getElementById("post-form");
 const alert = document.getElementById("alert-msg");
 
@@ -34,8 +34,10 @@ function showFileName(event) {
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    formData.append("desc", textArea.value); // the text data
+    formData.append("desc", desc.value); // the text data
     formData.append("image", file.files[0]);
+    formData.append("id", localStorage.getItem("id"));
+
     $.ajax({
         url: `${url}/makePost`,
         method: "post",
@@ -44,10 +46,7 @@ form.addEventListener("submit", function (e) {
         data: formData,
         enctype: "multipart/form-data",
         success: function (res) {
-            alertMsg.innerHtml = `<div class="alert alert-success alert-dismissible mt-4">
-            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success!</strong> This alert box could indicate a successful or positive action.
-        </div> `;
+            alert("Successfully Posted");
         },
         error: function () {
             alert("Server Error");
