@@ -7,41 +7,41 @@ var notification = document.querySelector("#Notifications");
 socket.emit("userConnected", senderId);
 
 socket.on("notify", (data) => {
-  var messages = [];
-  if (data == null) {
-    notification.innerHTML = 0;
-  } else {
-    data.msg.forEach((element) => {
-      if (element.read == false) {
-        messages.push(element);
-      }
-    });
-  }
-  notification.innerHTML = messages.length;
+    var messages = [];
+    if (data == null) {
+        notification.innerHTML = 0;
+    } else {
+        data.msg.forEach((element) => {
+            if (element.read == false) {
+                messages.push(element);
+            }
+        });
+    }
+    notification.innerHTML = messages.length;
 });
 
 $("#notification").on("click", function () {
-  location.href = "notification.html";
+    location.href = "notification.html";
 });
 
 $("#logout").on("click", function () {
-  localStorage.removeItem("x-auth-token");
-  localStorage.removeItem("id");
-  localStorage.removeItem("email");
-  window.location = "login.html";
+    localStorage.removeItem("x-auth-token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("email");
+    window.location = "login.html";
 });
 
 $(document).ready(function () {
-  $.ajax({
-    url: `${url}/home`,
-    method: "get",
-    headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
-    success: function (Users) {
-      let userRow = "";
-      var couter = "0";
-      for (let user of Users) {
-        couter++;
-        userRow += `<tr class="text-center" id="data">
+    $.ajax({
+        url: `${url}/home`,
+        method: "get",
+        headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
+        success: function (Users) {
+            let userRow = "";
+            var couter = "0";
+            for (let user of Users) {
+                couter++;
+                userRow += `<tr class="text-center" id="data">
                                 <td>${couter}</td>
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
@@ -50,45 +50,45 @@ $(document).ready(function () {
                                     <button class="btn btn-warning" id="viewProfile" onclick="viewProfile('${user._id}')">View Profile</button>
                                 </td>
                             </tr>`;
-      }
-      row.innerHTML = userRow;
-    },
-    error: function (xhr, status, error) {
-      if (!localStorage.getItem("x-auth-toke")) {
-        alert("No token");
-        window.location = "login.html";
-      } else {
-        alert("server Error");
-      }
-    },
-  });
+            }
+            row.innerHTML = userRow;
+        },
+        error: function (xhr, status, error) {
+            if (!localStorage.getItem("x-auth-toke")) {
+                alert("No token");
+                window.location = "login.html";
+            } else {
+                alert("server Error");
+            }
+        },
+    });
 });
 
 function addFriend(id) {
-  const email = localStorage.getItem("email");
-  socket.emit("requestSend", id);
-  socket.emit("requestMsg", id);
+    const email = localStorage.getItem("email");
+    socket.emit("requestSend", id);
+    socket.emit("requestMsg", id);
 
-  $(document).ready(function () {
-    $.ajax({
-      url: `${url}/addFriend/${id}`,
-      method: "post",
-      data: {
-        _id: senderId,
-        email: email,
-      },
-      headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
-      success: function (responce) {
-        alert(responce.msg);
-      },
-      error: function () {
-        alert("Server Error");
-      },
+    $(document).ready(function () {
+        $.ajax({
+            url: `${url}/addFriend/${id}`,
+            method: "post",
+            data: {
+                _id: senderId,
+                email: email,
+            },
+            headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
+            success: function (responce) {
+                alert(responce.msg);
+            },
+            error: function () {
+                alert("Server Error");
+            },
+        });
     });
-  });
 }
 
 function viewProfile(id) {
-  localStorage.setItem("profile-id", id);
-  window.location = "viewProfile.html";
+    localStorage.setItem("profile-id", id);
+    window.location = "viewProfile.html";
 }

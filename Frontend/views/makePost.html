@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/makePost.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pendingRequests.html">Friend Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="friendList.html">Friend List</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="makePost.html">Post</a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                <button class="btn btn-dark " id="notification" href="notification.html">
+                    Notifications<span class="badge badge-light" id="Notifications"></span>
+                </button>
+                <button class="btn btn-dark my-2 my-sm-0" id="logout"><i class="fa fa-sign-out"
+                        aria-hidden="true"></i>Logout</button>
+            </div>
+        </div>
+    </nav>
+    <section class="post">
+        <form id="post-form" enctype="multipart/form-data" action="home.htmlrs">
+            <div class="container py-5">
+                <header class="text-white text-center">
+                    <h1 class="display-4">Make Post</h1>
+                </header>
+                <div class="row py-4">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                            <input id="upload" type="file" onchange="readURL(this);" name="image"
+                                class="form-control border-0" required>
+                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
+                                file</label>
+                            <div class="input-group-append">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                                        class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                        class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            </div>
+                        </div>
+                        <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box
+                            below.</p>
+                        <div class="image-area mt-4"><img id="imageResult" src="#" alt=""
+                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Post Description</label>
+                    <textarea class="form-control" id="desc" name="desc" rows="3" required></textarea>
+                </div>
+                <div class="alert-msg">
+                    <!-- <div class="alert alert-success alert-dismissible mt-4">
+                    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+                </div> -->
+                </div>
+
+                <div class="row justify-content-center mt-4">
+                    <button class="btn btn-defualt btn-lg" id="post-button" type="submit"> Post </button>
+                </div>
+            </div>
+        </form>
+
+
+    </section>
+
+    <script type="text/javascript" src="../assets/js/common/socket.io.js"></script>
+    <script src="../assets/js/common/url.js"></script>
+    <script type="text/javascript" src="../assets/js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../assets/js/common/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/post/makePost.js"></script>
+
+</body>
+
+</html>

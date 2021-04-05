@@ -54,7 +54,6 @@ module.exports = function (io) {
     });
 
     socket.on("refreshChat", () => {
-      console.log("Refressh");
       socket.broadcast.emit("loadChat");
     });
   });
