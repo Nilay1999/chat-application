@@ -45,6 +45,11 @@ routes.post("/addMsg", messageController.addMessage);
 
 routes.post("/getConversation", messageController.getConversation);
 
-routes.post("/makePost", upload.single("image"), postController.makePost);
+routes.post("/post/makePost", upload.single("image"), postController.makePost);
 
+routes.post("/post/viewPosts", postController.viewPosts);
+
+routes.post("/post/addLike", postController.addLike);
+
+routes.post("/post/dislike", postController.dislike);
 module.exports = routes;

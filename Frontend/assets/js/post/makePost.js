@@ -39,7 +39,7 @@ form.addEventListener("submit", function (e) {
     formData.append("id", localStorage.getItem("id"));
 
     $.ajax({
-        url: `${url}/makePost`,
+        url: `${url}/post/makePost`,
         method: "post",
         processData: false,
         contentType: false,
@@ -52,4 +52,11 @@ form.addEventListener("submit", function (e) {
             alert("Server Error");
         },
     });
+});
+
+$("#logout").on("click", function () {
+    localStorage.removeItem("x-auth-token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("email");
+    window.location = "login.html";
 });

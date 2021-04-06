@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/profile.css">
-    <title>Friend List</title>
+    <link rel="stylesheet" href="../assets/css/viewPost.css">
+
+    <title>Post - Dashboard</title>
 </head>
 
 <body>
@@ -21,7 +23,7 @@
         <a class="navbar-brand" href="#"></a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -30,42 +32,55 @@
                 <li class="nav-item">
                     <a class="nav-link" href="pendingRequests.html">Friend Requests</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="friendList.html">Friend List</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="makePost.html">Make a Post</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="postBoard.html">Post-DashBoad</a>
+                    <a class="nav-link active" href="postBoard.html">Post-Dashboard</a>
                 </li>
             </ul>
             <div class="form-inline my-2 my-lg-0">
-                <!-- <button class="btn btn-dark " id="notification" href="notification.html">
-                    Notifications
-                </button> -->
+                <button class="btn btn-dark " id="notification" href="notification.html">
+                    Notifications<span class="badge badge-light" id="Notifications"></span>
+                </button>
                 <button class="btn btn-dark my-2 my-sm-0" id="logout"><i class="fa fa-sign-out"
                         aria-hidden="true"></i>Logout</button>
             </div>
         </div>
     </nav>
-    <section class="user">
-        <h3 class="text-center mt-4 mb-4">Friend List</h3>
-        <div class="info">
-            <table class="table" id="friend-list" style="overflow-x:auto;">
-                <tr class="text-center title">
-                    <th>#</th>
-                    <th>Email Address</th>
-                    <th>Username</th>
-                    <th>Contact No.</th>
-                </tr>
-            </table>
+    <section class="posts">
+        <div class="container py-5 post-area">
+            <!-- <div class="row py-4">
+                <div class="col-lg-6 mx-auto">
+                    <h3>Username</h3>
+                    <div class="image-area mt-4">
+                        <img id="imageResult"
+                            src="../assets/images/3840x2160 Wallpaper o hanami blossom festival and to enjoy the cherry.jpg"
+                            class="img-fluid rounded shadow-sm mx-auto d-block">
+                        <h6 class="mt-3">gasdkuakda dhasdjaksd asdsakdhaskh kas dhaksd</h6>
+                    </div>
+                    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success"><i class="fa fa-thumbs-up mr-1"
+                                aria-hidden="true"></i>Like</button>
+                        <button type="button" class="btn btn-secondary"><i class="fa fa-thumbs-down mr-1"
+                                aria-hidden="true"></i>Dislike</button>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </section>
+
+    <script type="text/javascript" src="../assets/js/common/socket.io.js"></script>
     <script src="../assets/js/common/url.js"></script>
     <script type="text/javascript" src="../assets/js/common/jquery.min.js"></script>
     <script type="text/javascript" src="../assets/js/common/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/FriendRequest/friendList.js"></script>
+    <script type="text/javascript" src="../assets/js/post/viewPost.js"></script>
+
+
+
 </body>
 
 </html>

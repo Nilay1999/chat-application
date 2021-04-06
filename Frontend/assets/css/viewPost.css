@@ -10,8 +10,7 @@
 }
 
 .image-area {
-    border: 2px solid white;
-    padding: 1rem;
+    border-radius: 10px;
     position: relative;
 }
 
@@ -42,15 +41,8 @@
     margin: 0 auto;
 }
 
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
 body {
     min-height: 100vh;
     background-color: #f8f8f8;
-    background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%);
+    background-image: linear-gradient(147deg, #a1a7b6 0%, #d7dde8 100%);
 }
