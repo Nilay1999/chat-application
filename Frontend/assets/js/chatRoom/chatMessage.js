@@ -109,7 +109,7 @@ function appendMessage(msg, type) {
     mainDiv.classList.add(className, "message");
 
     let markup = `
-        <h4>${moment(msg.createdAt).format("h:mm")}</h4>
+        <h4>${moment(msg.createdAt).format("DD/MM hh:mm")}</h4>
         <p>${msg.body}</p>
     `;
     mainDiv.innerHTML = markup;
