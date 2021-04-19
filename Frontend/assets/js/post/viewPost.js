@@ -42,7 +42,12 @@ $(document).ready(function () {
 });
 
 function like(id) {
-    document.getElementById(`${id}`).disabled = true;
+    var bothElements = document.querySelectorAll(`[id='${id}']`);
+
+    bothElements.forEach((i) => {
+        i.disabled = true;
+    });
+
     $.ajax({
         url: `${url}/post/addLike`,
         method: "post",
