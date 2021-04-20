@@ -93,3 +93,5 @@ exports.addFriend = (req, res) => {
         }
     );
 };
+
+exports.deleteFriend = (req, res) => {};
