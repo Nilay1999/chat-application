@@ -66,7 +66,25 @@ exports.groupConversation = (req, res) => {
             admin: admin,
             groupName: groupName,
         }).save((err, group) => {
-            res.json({ msg: "Group Created" });
+            res.json({ msg: "Group Created", groupId: group._id });
         });
     }
+};
+
+exports.addToGroup = (req, res) => {
+    const member = req.body.member;
+    const groupId = req.body.groupId;
+
+    groupConv.findOneAndUpdate(
+        { _id: groupId },
+        {
+            $push: {
+                participants: member,
+            },
+        },
+        (err, group) => {
+            if (err) console.log(err);
+            else res.json({ msg: "Added to Group" });
+        }
+    );
 };

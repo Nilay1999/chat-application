@@ -18,10 +18,11 @@ $(document).ready(function () {
             method: "post",
             data: {
                 id: adminId,
-                name: name,
+                grpName: name,
             },
             success: function (res) {
                 alert(res.msg);
+                sessionStorage.setItem("groupId", res.groupId);
             },
             error: function () {
                 alert("Server Error");
@@ -41,7 +42,7 @@ $(document).ready(function () {
                 for (let user of Users) {
                     userRow += ` 
                     <li class="w3-bar">
-                        <button class="w3-right btn btn-success mt-3 btn-lg">Add</button>
+                        <button class="w3-right btn btn-success mt-3 btn-lg" id="${user._id}" onclick="addToList('${user._id}')">Add</button>
                         <img src="../../Backend/app/uploads/${user.img}" class="w3-bar-item  w3-circle w3-hide-small" style="width:85px;height:70px">
                         <div class="w3-bar-item">
                             <span class="w3-large">${user.userName}</span><br>
@@ -62,3 +63,22 @@ $(document).ready(function () {
         });
     });
 });
+
+function addToList(id) {
+    document.getElementById(`${id}`).disabled = true;
+
+    $.ajax({
+        url: `${url}/group/addToGroup`,
+        method: "post",
+        data: {
+            member: id,
+            groupId: sessionStorage.getItem("groupId"),
+        },
+        success: function () {
+            console.log("Added");
+        },
+        error: function () {
+            alert("server Error");
+        },
+    });
+}
