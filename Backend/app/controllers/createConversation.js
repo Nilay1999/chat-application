@@ -1,4 +1,5 @@
 const Conversation = require("../models/conversation");
+const groupConv = require("../models/groupConv");
 const Message = require("../models/messages");
 const User = require("../models/userSchema");
 
@@ -52,4 +53,20 @@ exports.createConv = (req, res) => {
             }
         }
     );
+};
+
+exports.groupConversation = (req, res) => {
+    const admin = req.body.id;
+    const groupName = req.body.grpName;
+
+    if (groupName == null) {
+        res.json({ msg: "Please enter group Name" });
+    } else {
+        groupConv({
+            admin: admin,
+            groupName: groupName,
+        }).save((err, group) => {
+            res.json({ msg: "Group Created" });
+        });
+    }
 };

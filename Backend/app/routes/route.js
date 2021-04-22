@@ -52,4 +52,7 @@ routes.post("/post/viewPosts", postController.viewPosts);
 routes.post("/post/addLike", postController.addLike);
 
 routes.post("/post/dislike", postController.dislike);
+
+routes.post("/group/createGroup", createConvController.groupConversation);
+
 module.exports = routes;

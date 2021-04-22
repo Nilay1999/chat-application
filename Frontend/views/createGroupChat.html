@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../assets/css/createGroup.css">
+    <title>Create Group</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                    <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pendingRequests.html">Friend Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="friendList.html">Friend List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="chatRoom.html">Chat Room</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="createGroupChat.html">Create Group</a>
+                </li>
+
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                <!-- <button class="btn btn-dark " id="notification" href="notification.html">
+                    Notifications
+                </button> -->
+                <button class="btn btn-dark my-2 my-sm-0" id="logout"><i class="fa fa-sign-out"
+                        aria-hidden="true"></i>Logout</button>
+            </div>
+        </div>
+    </nav>
+    <section class="create-group">
+        <h1 class="text-center mt-3">Create a group</h1>
+        <form class="form-inline justify-content-center mt-5">
+
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Enter Group Name</label>
+                <input type="text" class="form-control" id="groupName" placeholder="Enter Group Name">
+            </div>
+            <button type="button" id="loadList" class="btn btn-primary mb-2">Create</button>
+        </form>
+    </section>
+    <div class="mb-4 ">
+        <hr class="solid">
+    </div>
+    <div class="w3-container">
+        <h2 class="text-center mb-5">Add Friends</h2>
+        <ul class="w3-ul w3-card-4" id="friendList"></ul>
+    </div>
+
+
+    <script type="text/javascript" src="../assets/js/common/socket.io.js"></script>
+    <script src="../assets/js/common/url.js"></script>
+    <script type="text/javascript" src="../assets/js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="../assets/js/common/bootstrap.min.js"></script>
+    <script src="../assets/js/chatRoom/createGroup.js"></script>
+</body>
+
+</html>
