@@ -23,6 +23,7 @@ exports.register = (req, res) => {
                     if (err) {
                         throw err;
                     }
+                    10;
                     password = hash;
                     user({
                         email,

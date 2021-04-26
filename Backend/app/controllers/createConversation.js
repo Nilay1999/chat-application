@@ -88,3 +88,11 @@ exports.addToGroup = (req, res) => {
         }
     );
 };
+
+exports.getGroupData = (req, res) => {
+    var user = req.body.id;
+    groupConv.find({ participants: req.body.id }, (err, groupData) => {
+        if (err) console.log(err);
+        else res.json(groupData);
+    });
+};

@@ -57,4 +57,6 @@ routes.post("/group/createGroup", createConvController.groupConversation);
 
 routes.post("/group/addToGroup", createConvController.addToGroup);
 
+routes.post("/group/getGroup", createConvController.getGroupData);
+
 module.exports = routes;

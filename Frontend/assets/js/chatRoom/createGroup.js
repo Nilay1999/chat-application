@@ -1,4 +1,6 @@
 let list = document.querySelector("#friendList");
+let groupName = document.querySelector("#groupName");
+let loadList = document.querySelector("#loadList");
 
 $("#logout").on("click", function () {
     localStorage.removeItem("x-auth-token");
@@ -6,6 +8,13 @@ $("#logout").on("click", function () {
     localStorage.removeItem("email");
     sessionStorage.removeItem("convId");
     window.location = "login.html";
+});
+
+groupName.addEventListener("input", (e) => {
+    e.preventDefault();
+    if (groupName.value != null) {
+        loadList.disabled = false;
+    }
 });
 
 $(document).ready(function () {
