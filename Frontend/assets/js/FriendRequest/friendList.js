@@ -30,7 +30,7 @@ $(document).ready(function () {
                                 <td>${user.email}</td>
                                 <td>${user.userName}</td>
                                 <td><button class="btn btn-info mr-2" id="Message" onclick="message('${user._id}')">Message</button>
-                                <button class="btn btn-danger mr-2" id="Message" onclick="message('${user._id}')">Delete</button></td>
+    <button class="btn btn-danger mr-2" id="Message" onclick="message('${user._id}')">Delete</button></td>
                                 
                             </tr>`;
             }

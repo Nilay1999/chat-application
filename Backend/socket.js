@@ -70,5 +70,13 @@ module.exports = function (io) {
         socket.on("refreshChat", () => {
             socket.broadcast.emit("loadChat");
         });
+
+        socket.on("markAsRead", (msg) => {
+            io.emit("addMark", msg);
+        });
+
+        socket.on("Marked", (msg) => {
+            socket.broadcast.emit("loadMark", msg);
+        });
     });
 };

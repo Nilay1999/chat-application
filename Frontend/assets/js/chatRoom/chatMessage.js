@@ -6,17 +6,17 @@ let convId = sessionStorage.getItem("convId");
 let userId = localStorage.getItem("id");
 let userName = sessionStorage.getItem("userName");
 let friendRow = document.querySelector(".sidenav");
+var messages;
 
 $("#logout").on("click", function () {
     localStorage.removeItem("x-auth-token");
     localStorage.removeItem("id");
-    localStorage.removeItem("email");
-    sessionStorage.removeItem("convId");
     window.location = "login.html";
 });
 
-window.onload = function msgLoad() {
+$(document).ready(function () {
     msgTo.innerHTML = `<h1>${userName}</h1>`;
+
     $.ajax({
         url: `${url}/getConversation`,
         method: "post",
@@ -27,7 +27,7 @@ window.onload = function msgLoad() {
         success: function (response) {
             response.forEach((i) => {
                 if (i.author == userId) {
-                    appendMessage(i, "outgoing");
+                    appendMessage(i, "outgoing", i.status);
                 } else {
                     appendMessage(i, "incoming");
                 }
@@ -63,7 +63,29 @@ window.onload = function msgLoad() {
             }
         },
     });
-};
+
+    $.ajax({
+        url: `${url}/markAsRead`,
+        method: "post",
+        data: {
+            id: sessionStorage.getItem("receiver"),
+        },
+    });
+
+    $.ajax({
+        url: `${url}/loadLastMessage`,
+        method: "post",
+        data: {
+            convId: convId,
+        },
+        success: function (i) {
+            socket.emit("Marked", i);
+        },
+        error: function () {
+            alert("Server Error");
+        },
+    });
+});
 
 textarea.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -90,53 +112,101 @@ function sendMessage(message) {
         },
         headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
         success: function (response) {
-            socket.emit("refreshChat");
+            socket.emit("refreshChat", sessionStorage.getItem("receiver"));
+            textarea.value = "";
+
+            appendMessage(response, "outgoing", response.status);
+            scrollToBottom();
         },
         error: function () {
             alert("Server Error");
         },
     });
-
-    appendMessage(msg, "outgoing");
-    textarea.value = "";
-
-    scrollToBottom();
 }
 
-function appendMessage(msg, type) {
+function appendMessage(msg, type, status) {
     let mainDiv = document.createElement("div");
     let className = type;
     mainDiv.classList.add(className, "message");
 
-    let markup = `
-        <h4>${moment(msg.createdAt).format("DD/MM hh:mm")}</h4>
+    if (status == 3) {
+        let markup = `
+        <div id="${msg._id}">
+        <h4>${moment(msg.createdAt).format(
+            "DD/MM hh:mm"
+        )} &nbsp<i class="fa fa-check-circle" aria-hidden="true"></i></h4>
+        <p>${msg.body}</p>
+       
+        </div>
+    `;
+        mainDiv.innerHTML = markup;
+        messageArea.appendChild(mainDiv);
+    } else {
+        let markup = `
+        <h4 id="${msg._id}">${moment(msg.createdAt).format("DD/MM hh:mm")}</h4>
         <p>${msg.body}</p>
     `;
-    mainDiv.innerHTML = markup;
-    messageArea.appendChild(mainDiv);
+        mainDiv.innerHTML = markup;
+        messageArea.appendChild(mainDiv);
+    }
 }
 
+socket.on("addMark", function (message) {
+    setTimeout(() => {
+        if (message.status == 3) {
+            if (message.author == userId) {
+                var msg = document.getElementById(`${message._id}`);
+                let icon = document.createElement("i");
+                icon.classList.add("ml-1", "fa", "fa-check-circle");
+                msg.appendChild(icon);
+            }
+        }
+    }, 2000);
+});
+
+socket.on("loadMark", function (message) {
+    setTimeout(() => {
+        if (message.status == 3) {
+            if (message.author == userId) {
+                var msg = document.getElementById(`${message._id}`);
+                let icon = document.createElement("i");
+                icon.classList.add("ml-1", "fa", "fa-check-circle");
+                msg.appendChild(icon);
+            }
+        }
+    }, 2000);
+});
+
 socket.on("loadChat", function () {
-    $.ajax({
-        url: `${url}/getConversation`,
-        method: "post",
-        data: {
-            convId: convId,
-        },
-        success: function (response) {
-            messageArea.innerHTML = "";
-            response.forEach((i) => {
+    setTimeout(() => {
+        $.ajax({
+            url: `${url}/loadLastMessage`,
+            method: "post",
+            data: {
+                convId: convId,
+            },
+            success: function (i) {
+                socket.emit("markAsRead", i);
+                console.log(i);
                 if (i.author == userId) {
-                    appendMessage(i, "outgoing");
+                    appendMessage(i, "outgoing", i.status);
                     scrollToBottom();
                 } else {
                     appendMessage(i, "incoming");
                     scrollToBottom();
                 }
-            });
-        },
-        error: function () {
-            alert("Server Error");
+            },
+            error: function () {
+                alert("Server Error");
+            },
+        });
+    }, 1000);
+
+    $.ajax({
+        url: `${url}/markAsRead`,
+        method: "post",
+        data: {
+            id: sessionStorage.getItem("receiver"),
         },
     });
 });
@@ -155,6 +225,7 @@ function message(id) {
         success: function (response) {
             sessionStorage.setItem("convId", response.id);
             sessionStorage.setItem("userName", response.userName);
+            sessionStorage.setItem("receiver", id);
             window.location = "chatRoom.html";
         },
         error: function (xhr, status, error) {

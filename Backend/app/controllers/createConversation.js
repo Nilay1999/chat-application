@@ -10,7 +10,6 @@ exports.createConv = (req, res) => {
     Conversation.findOne(
         { participants: [userId, receiverId] },
         (err, conversation1) => {
-            if (err) return res.send(err);
             if (conversation1 != null) {
                 User.findOne({ _id: receiverId }, (err, user) => {
                     res.json({

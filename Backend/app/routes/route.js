@@ -45,13 +45,9 @@ routes.post("/addMsg", messageController.addMessage);
 
 routes.post("/getConversation", messageController.getConversation);
 
-routes.post("/post/makePost", upload.single("image"), postController.makePost);
+routes.post("/loadLastMessage", messageController.loadLastMessage);
 
-routes.post("/post/viewPosts", postController.viewPosts);
-
-routes.post("/post/addLike", postController.addLike);
-
-routes.post("/post/dislike", postController.dislike);
+routes.post("/markAsRead", messageController.markAsRead);
 
 routes.post("/group/createGroup", createConvController.groupConversation);
 

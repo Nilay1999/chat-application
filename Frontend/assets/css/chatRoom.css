@@ -72,6 +72,7 @@ textarea {
     background: #cfd1f7;
     color: #787986;
     margin-left: auto;
+    min-width: 100px;
 }
 
 .message h4 {
