@@ -5,6 +5,7 @@ var socket = io("http://localhost:3000", { transport: ["websocket"] });
 var notification = document.querySelector("#Notifications");
 
 socket.emit("userConnected", senderId);
+socket.emit("online", senderId);
 
 socket.on("notify", (data) => {
     var messages = [];

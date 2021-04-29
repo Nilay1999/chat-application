@@ -13,7 +13,6 @@ const requestActionController = require("../controllers/requestAction");
 const notificationController = require("../controllers/readNotification");
 const createConvController = require("../controllers/createConversation");
 const messageController = require("../controllers/messageAction");
-const postController = require("../controllers/makePost");
 
 routes.post("/register", upload.single("img"), registerController.register);
 

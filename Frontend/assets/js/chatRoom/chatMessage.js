@@ -50,7 +50,7 @@ $(document).ready(function () {
             let list = "";
 
             for (let friend of Friends) {
-                list += `<button class="btn" onclick="message('${friend._id}')">${friend.userName}</button>`;
+                list += `<button class="btn" id="${friend._id}" onclick="message('${friend._id}')">${friend.userName}</button>`;
             }
             friendRow.innerHTML = list;
         },
@@ -59,7 +59,7 @@ $(document).ready(function () {
                 alert("No token");
                 window.location = "login.html";
             } else {
-                alert("server Error");
+                //alert("server Error");
             }
         },
     });
@@ -81,9 +81,7 @@ $(document).ready(function () {
         success: function (i) {
             socket.emit("Marked", i);
         },
-        error: function () {
-            alert("Server Error");
-        },
+        error: function () {},
     });
 });
 
