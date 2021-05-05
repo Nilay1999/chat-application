@@ -13,6 +13,7 @@ const requestActionController = require("../controllers/requestAction");
 const notificationController = require("../controllers/readNotification");
 const createConvController = require("../controllers/createConversation");
 const messageController = require("../controllers/messageAction");
+const groupController = require("../controllers/groupConversation");
 
 routes.post("/register", upload.single("img"), registerController.register);
 
@@ -48,10 +49,12 @@ routes.post("/loadLastMessage", messageController.loadLastMessage);
 
 routes.post("/markAsRead", messageController.markAsRead);
 
-routes.post("/group/createGroup", createConvController.groupConversation);
+routes.post("/group/createGroup", groupController.groupConversation);
 
-routes.post("/group/addToGroup", createConvController.addToGroup);
+routes.post("/group/addToGroup", groupController.addToGroup);
 
-routes.post("/group/getGroup", createConvController.getGroupData);
+routes.post("/group/getGroup", groupController.getGroupData);
+
+routes.post("/group/addMessage", groupController.addGroupMessage);
 
 module.exports = routes;
