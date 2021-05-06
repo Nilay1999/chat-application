@@ -57,4 +57,8 @@ routes.post("/group/getGroup", groupController.getGroupData);
 
 routes.post("/group/addMessage", groupController.addGroupMessage);
 
+routes.post("/group/getGroupChat", groupController.getGroupChat);
+
+routes.post("/group/getLastMessage", groupController.getLastMessage);
+
 module.exports = routes;

@@ -71,6 +71,10 @@ module.exports = function (io) {
             socket.broadcast.emit("loadChat");
         });
 
+        socket.on("refreshGroupChat", () => {
+            socket.broadcast.emit("loadGroupChat");
+        });
+
         socket.on("markAsRead", (msg) => {
             io.emit("addMark", msg);
         });

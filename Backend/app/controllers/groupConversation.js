@@ -40,8 +40,7 @@ exports.getGroupData = (req, res) => {
     groupConv.find(
         { $or: [{ participants: user }, { admin: user }] },
         (err, groupData) => {
-            if (err) console.log(err);
-            else res.json(groupData);
+            res.json(groupData);
         }
     );
 };
@@ -60,4 +59,33 @@ exports.addGroupMessage = (req, res) => {
             res.json(msg);
         }
     });
+};
+
+exports.getGroupChat = (req, res) => {
+    const { groupId } = req.body;
+    groupMessage
+        .find({ conversationId: groupId })
+        .populate("author", "userName")
+        .exec((err, message) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(message);
+            }
+        });
+};
+
+exports.getLastMessage = (req, res) => {
+    const { groupId } = req.body;
+    groupMessage
+        .findOne({ conversationId: groupId })
+        .sort({ createdAt: -1 })
+        .populate("author", "userName")
+        .exec((err, message) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(message);
+            }
+        });
 };
