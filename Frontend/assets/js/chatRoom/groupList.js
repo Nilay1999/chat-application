@@ -7,13 +7,18 @@ let msgTo = document.querySelector(".brand");
 let convId = sessionStorage.getItem("convId");
 
 $("#logout").on("click", function () {
-    localStorage.removeItem("x-auth-token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("email");
+    localStorage.removeItem("x-auth-token", "id", "email");
+    sessionStorage.removeItem("groupID", "groupName");
     window.location = "login.html";
 });
 
 $(document).ready(function () {
+    msgTo.innerHTML = `
+    <h1>${sessionStorage.getItem("groupName")}</h1>
+    <button class="btn btn-danger ml-auto" onclick="leaveGroup('${sessionStorage.getItem(
+        "groupID"
+    )}')">Leave Group</button>
+    `;
     $.ajax({
         url: `${url}/group/getGroupChat`,
         method: "post",
@@ -21,7 +26,6 @@ $(document).ready(function () {
             groupId: sessionStorage.getItem("groupID"),
         },
         success: function (msg) {
-            console.log(msg);
             msg.forEach((i) => {
                 if (i.author._id == userId) {
                     appendMessage(i, "outgoing");
@@ -32,7 +36,7 @@ $(document).ready(function () {
             });
         },
         error: function () {
-            alert("Server Error");
+            console.log("Server Error");
         },
     });
 
@@ -46,25 +50,21 @@ $(document).ready(function () {
             let list = "";
 
             for (let groups of response) {
-                list += `<button class="btn" id="${groups._id}" onclick="message('${groups._id}')">${groups.groupName}</button>`;
+                list += `<i class="fa fa-ellipsis-v" aria-hidden="true"></i><button class="btn" id="${groups._id}" onclick="message('${groups._id}','${groups.groupName}')">${groups.groupName}</button>`;
             }
             Row.innerHTML = list;
         },
         error: function () {
-            alert("Server Error");
+            console.log("Server Error");
         },
     });
 });
 
-function message(id) {
+function message(id, Name) {
     console.log(id);
     sessionStorage.setItem("groupID", id);
+    sessionStorage.setItem("groupName", Name);
     window.location = "groupList.html";
-    // $.ajax({
-    //     url: ``,
-    //     method: "post",
-    //     data: {},
-    // });
 }
 
 textarea.addEventListener("keydown", (e) => {
@@ -143,3 +143,17 @@ socket.on("loadGroupChat", function () {
         },
     });
 });
+
+function leaveGroup(id) {
+    $.ajax({
+        url: `${url}/group/leaveGroup`,
+        method: "post",
+        data: {
+            groupId: id,
+            userId: userId,
+        },
+        success: () => {
+            window.location = "groupList.html";
+        },
+    });
+}

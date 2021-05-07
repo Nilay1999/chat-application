@@ -67,11 +67,7 @@ exports.getGroupChat = (req, res) => {
         .find({ conversationId: groupId })
         .populate("author", "userName")
         .exec((err, message) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.json(message);
-            }
+            res.json(message);
         });
 };
 
@@ -88,4 +84,19 @@ exports.getLastMessage = (req, res) => {
                 res.json(message);
             }
         });
+};
+
+exports.leaveGroup = (req, res) => {
+    const { groupId, userId } = req.body;
+    groupConv.findOneAndUpdate(
+        { _id: groupId, participants: userId },
+        {
+            $pull: {
+                participants: userId,
+            },
+        },
+        (err, data) => {
+            console.log(data);
+        }
+    );
 };
