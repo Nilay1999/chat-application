@@ -13,12 +13,19 @@ $("#logout").on("click", function () {
 });
 
 $(document).ready(function () {
-    msgTo.innerHTML = `
-    <h1>${sessionStorage.getItem("groupName")}</h1>
-    <button class="btn btn-danger ml-auto" onclick="leaveGroup('${sessionStorage.getItem(
-        "groupID"
-    )}')">Leave Group</button>
+    if (sessionStorage.getItem("admin") == userId) {
+        msgTo.innerHTML = `
+        <h1>${sessionStorage.getItem("groupName")}</h1>
     `;
+    } else {
+        msgTo.innerHTML = `
+        <h1>${sessionStorage.getItem("groupName")}</h1>
+        <button class="btn btn-danger ml-auto" onclick="leaveGroup('${sessionStorage.getItem(
+            "groupID"
+        )}')">Leave Group</button>
+        `;
+    }
+
     $.ajax({
         url: `${url}/group/getGroupChat`,
         method: "post",
@@ -46,11 +53,11 @@ $(document).ready(function () {
         data: {
             id: userId,
         },
+        headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
         success: function (response) {
             let list = "";
-
             for (let groups of response) {
-                list += `<i class="fa fa-ellipsis-v" aria-hidden="true"></i><button class="btn" id="${groups._id}" onclick="message('${groups._id}','${groups.groupName}')">${groups.groupName}</button>`;
+                list += `<i class="fa fa-ellipsis-v" aria-hidden="true"></i><button class="btn" id="${groups._id}" onclick="message('${groups._id}','${groups.groupName}','${groups.admin}')">${groups.groupName}</button>`;
             }
             Row.innerHTML = list;
         },
@@ -60,8 +67,9 @@ $(document).ready(function () {
     });
 });
 
-function message(id, Name) {
+function message(id, Name, admin) {
     console.log(id);
+    sessionStorage.setItem("admin", admin);
     sessionStorage.setItem("groupID", id);
     sessionStorage.setItem("groupName", Name);
     window.location = "groupList.html";
@@ -152,7 +160,10 @@ function leaveGroup(id) {
             groupId: id,
             userId: userId,
         },
-        success: () => {
+        success: (response) => {
+            sessionStorage.removeItem("groupID", "groupName");
+            alert(response.msg);
+
             window.location = "groupList.html";
         },
     });

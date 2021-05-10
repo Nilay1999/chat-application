@@ -49,7 +49,7 @@ routes.post("/loadLastMessage", messageController.loadLastMessage);
 
 routes.post("/markAsRead", messageController.markAsRead);
 
-routes.post("/group/createGroup", groupController.groupConversation);
+routes.post("/group/createGroup", auth, groupController.groupConversation);
 
 routes.post("/group/addToGroup", groupController.addToGroup);
 
@@ -60,5 +60,7 @@ routes.post("/group/addMessage", groupController.addGroupMessage);
 routes.post("/group/getGroupChat", groupController.getGroupChat);
 
 routes.post("/group/getLastMessage", groupController.getLastMessage);
+
+routes.post("/group/leaveGroup", groupController.leaveGroup);
 
 module.exports = routes;

@@ -35,7 +35,7 @@ $(document).ready(function () {
             });
         },
         error: function () {
-            //alert("Server Error");
+            console.log("Server Error");
         },
     });
 
@@ -59,7 +59,7 @@ $(document).ready(function () {
                 alert("No token");
                 window.location = "login.html";
             } else {
-                //alert("server Error");
+                alert("server Error");
             }
         },
     });

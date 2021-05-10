@@ -96,7 +96,7 @@ exports.leaveGroup = (req, res) => {
             },
         },
         (err, data) => {
-            console.log(data);
+            res.json({ msg: "You have left the group" });
         }
     );
 };
