@@ -3,10 +3,9 @@ let groupName = document.querySelector("#groupName");
 let loadList = document.querySelector("#loadList");
 
 $("#logout").on("click", function () {
-    localStorage.removeItem("x-auth-token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("email");
+    localStorage.removeItem("x-auth-token", "id", "email");
     sessionStorage.removeItem("convId");
+    socket.emit("offline", localStorage.getItem("id"));
     window.location = "login.html";
 });
 

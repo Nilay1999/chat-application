@@ -14,6 +14,7 @@ const notificationController = require("../controllers/readNotification");
 const createConvController = require("../controllers/createConversation");
 const messageController = require("../controllers/messageAction");
 const groupController = require("../controllers/groupConversation");
+//const mailController = require("../controllers/forgotPassword");
 
 routes.post("/register", upload.single("img"), registerController.register);
 

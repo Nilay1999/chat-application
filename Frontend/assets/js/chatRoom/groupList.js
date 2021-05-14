@@ -9,6 +9,7 @@ let convId = sessionStorage.getItem("convId");
 $("#logout").on("click", function () {
     localStorage.removeItem("x-auth-token", "id", "email");
     sessionStorage.removeItem("groupID", "groupName");
+    socket.emit("offline", localStorage.getItem("id"));
     window.location = "login.html";
 });
 

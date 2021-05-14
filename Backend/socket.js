@@ -82,5 +82,14 @@ module.exports = function (io) {
         socket.on("Marked", (msg) => {
             socket.broadcast.emit("loadMark", msg);
         });
+
+        socket.on("online", (id) => {
+            User.updateOne({ _id: id }, { online: true }, (err, data) => {});
+            socket.broadcast.emit("refreshList");
+        });
+        socket.on("offline", (id) => {
+            User.updateOne({ _id: id }, { online: false }, (err, data) => {});
+            socket.broadcast.emit("refreshList");
+        });
     });
 };

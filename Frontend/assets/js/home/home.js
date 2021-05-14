@@ -26,9 +26,8 @@ $("#notification").on("click", function () {
 });
 
 $("#logout").on("click", function () {
-    localStorage.removeItem("x-auth-token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("email");
+    socket.emit("offline", senderId);
+    localStorage.removeItem("x-auth-token", "id", "email");
     window.location = "login.html";
 });
 
@@ -63,6 +62,8 @@ $(document).ready(function () {
             }
         },
     });
+
+    $.ajax({});
 });
 
 function addFriend(id) {

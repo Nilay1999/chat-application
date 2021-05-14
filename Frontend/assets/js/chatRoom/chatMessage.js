@@ -6,11 +6,11 @@ let convId = sessionStorage.getItem("convId");
 let userId = localStorage.getItem("id");
 let userName = sessionStorage.getItem("userName");
 let friendRow = document.querySelector(".sidenav");
-var messages;
+let friendList = "";
 
 $("#logout").on("click", function () {
-    localStorage.removeItem("x-auth-token");
-    localStorage.removeItem("id");
+    socket.emit("offline", localStorage.getItem("id"));
+    localStorage.removeItem("x-auth-token", "id");
     window.location = "login.html";
 });
 
@@ -47,10 +47,16 @@ $(document).ready(function () {
         },
         headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
         success: function (Friends) {
+            friendList = Friends;
+
             let list = "";
 
             for (let friend of Friends) {
-                list += `<button class="btn" id="${friend._id}" onclick="message('${friend._id}')">${friend.userName}</button>`;
+                if (friend.online == true) {
+                    list += `<button class="btn btn-outline-success" id="${friend._id}" onclick="message('${friend._id}')">${friend.userName}</button>`;
+                } else {
+                    list += `<button class="btn" id="${friend._id}" onclick="message('${friend._id}')">${friend.userName}</button>`;
+                }
             }
             friendRow.innerHTML = list;
         },
@@ -212,6 +218,39 @@ socket.on("loadChat", function () {
 function scrollToBottom() {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
+
+socket.on("refreshList", () => {
+    $.ajax({
+        url: `${url}/friendList`,
+        method: "post",
+        data: {
+            userId: localStorage.getItem("id"),
+        },
+        headers: { "x-auth-token": localStorage.getItem("x-auth-token") },
+        success: function (Friends) {
+            friendList = Friends;
+
+            let list = "";
+
+            for (let friend of Friends) {
+                if (friend.online == true) {
+                    list += `<button class="btn btn-outline-success" id="${friend._id}" onclick="message('${friend._id}')">${friend.userName}</button>`;
+                } else {
+                    list += `<button class="btn" id="${friend._id}" onclick="message('${friend._id}')">${friend.userName}</button>`;
+                }
+            }
+            friendRow.innerHTML = list;
+        },
+        error: function (xhr, status, error) {
+            if (!localStorage.getItem("x-auth-token")) {
+                alert("No token");
+                window.location = "login.html";
+            } else {
+                alert("server Error");
+            }
+        },
+    });
+});
 
 function message(id) {
     $.ajax({
