@@ -11,6 +11,6 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(() => console.log("Successfully connected To MongoDB"));
+    .then(() => console.log("Successfully connected to DataBase"));
 
 module.exports = mongoose;

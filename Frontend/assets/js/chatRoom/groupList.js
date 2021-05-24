@@ -5,6 +5,7 @@ let messageArea = document.querySelector(".message__area");
 var socket = io("http://localhost:3000", { transport: ["websocket"] });
 let msgTo = document.querySelector(".brand");
 let convId = sessionStorage.getItem("convId");
+let msgArray = "";
 
 $("#logout").on("click", function () {
     localStorage.removeItem("x-auth-token", "id", "email");
@@ -34,6 +35,8 @@ $(document).ready(function () {
             groupId: sessionStorage.getItem("groupID"),
         },
         success: function (msg) {
+            msgArray = msg;
+            console.log(msgArray);
             msg.forEach((i) => {
                 if (i.author._id == userId) {
                     appendMessage(i, "outgoing");
@@ -66,6 +69,10 @@ $(document).ready(function () {
             console.log("Server Error");
         },
     });
+
+    // $.ajax({
+    //     url: `${url}/group/readBy`,
+    // });
 });
 
 function message(id, Name, admin) {
@@ -106,6 +113,20 @@ function sendMessage(message) {
             scrollToBottom();
         },
     });
+    $.ajax({
+        url: `${url}/group/getLastMessage`,
+        method: "post",
+        data: {
+            groupId: sessionStorage.getItem("groupID"),
+        },
+        success: function (lastMsg) {
+            msgArray.push(lastMsg);
+        },
+    });
+
+    setTimeout(() => {
+        console.log(msgArray);
+    }, 1000);
 }
 
 function appendMessage(msg, type) {
@@ -141,7 +162,8 @@ socket.on("loadGroupChat", function () {
             groupId: sessionStorage.getItem("groupID"),
         },
         success: function (lastMsg) {
-            console.log(lastMsg);
+            msgArray.push(lastMsg);
+
             if (lastMsg.author._id == userId) {
                 appendMessage(lastMsg, "outgoing");
                 scrollToBottom();

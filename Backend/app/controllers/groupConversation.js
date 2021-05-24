@@ -96,7 +96,28 @@ exports.leaveGroup = (req, res) => {
             },
         },
         (err, data) => {
-            res.json({ msg: "You have left the group" });
+            res.json({ msg: "You left the group" });
         }
     );
+};
+
+exports.readBy = (req, res) => {
+    const { msgId, userId } = req.body;
+    groupMessage.findOne({ _id: msgId, readBy: [userId] }, (err, data) => {
+        if (data == null) {
+            groupMessage.findOneAndUpdate(
+                { _id: msgId },
+                {
+                    $push: {
+                        readBy: [userId],
+                    },
+                },
+                (err, data) => {
+                    res.json(data);
+                }
+            );
+        } else {
+            res.json({ msg: " already read" });
+        }
+    });
 };
