@@ -5,8 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-        "start": "nodemon server.js"
+        "start": "nodemon ./app/server.js"
     },
     "author": "",
     "license": "ISC",
@@ -18,20 +17,5 @@
     },
     "devDependencies": {
         "nodemon": "^2.0.13"
-=======
-        "start": "nodemon app/server.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "express": "^4.17.1",
-        "mongoose": "^6.0.4",
-        "multer": "^1.4.3",
-        "socket.io": "^4.2.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.12"
->>>>>>> 0dd73c32f37f6cb8e263402c77b2552338e76d2c
     }
 }
