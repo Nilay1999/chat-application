@@ -59,7 +59,6 @@ const debounce = (fn, delay = 500) => {
         if (timeoutId) {
             clearTimeout(timeoutId);
         }
-
         timeoutId = setTimeout(() => {
             fn.apply(null, args);
         }, delay);

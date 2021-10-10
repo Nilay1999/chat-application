@@ -50,7 +50,7 @@ $(document).ready(function () {
             card.innerHTML = cardData;
         },
         error: function (xhr, status, error) {
-            if (!localStorage.getItem("x-auth-toke")) {
+            if (!localStorage.getItem("x-auth-token")) {
                 alert("No token");
                 window.location = "login.html";
             } else {

@@ -12,24 +12,14 @@ exports.home = async (req, res) => {
 
 exports.online = (req, res) => {
     const id = req.body.id;
-    user.updateOne(
-        { _id: id },
-        { online: true },
-
-        (err, data) => {
-            res.json(data);
-        }
-    );
+    user.updateOne({ _id: id }, { online: true }, (err, data) => {
+        res.json(data);
+    });
 };
 
 exports.offline = (req, res) => {
     const id = req.body.id;
-    user.updateOne(
-        { _id: id },
-        { online: false },
-
-        (err, data) => {
-            res.json(data);
-        }
-    );
+    user.updateOne({ _id: id }, { online: false }, (err, data) => {
+        res.json(data);
+    });
 };

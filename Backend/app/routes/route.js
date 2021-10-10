@@ -64,4 +64,6 @@ routes.post("/group/getLastMessage", groupController.getLastMessage);
 
 routes.post("/group/leaveGroup", groupController.leaveGroup);
 
+routes.post("/group/readBy", groupController.readBy);
+
 module.exports = routes;
