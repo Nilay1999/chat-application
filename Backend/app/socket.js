@@ -1,47 +1,47 @@
-const User = require("./app/models/userSchema");
-const Notification = require("./app/models/notification");
+const User = require('./models/userSchema');
+const Notification = require('./models/notification');
 
 module.exports = function (io) {
-    io.on("connection", (socket) => {
-        socket.on("userConnected", (id) => {
+    io.on('connection', (socket) => {
+        socket.on('userConnected', (id) => {
             let promise = new Promise(function (resolve, result) {
                 setTimeout(
                     () =>
                         resolve(
                             Notification.findOne({
                                 userId: id,
-                                "msg.read": false,
+                                'msg.read': false,
                             })
                         ),
                     1000
                 );
             });
             promise.then(
-                (result) => io.to(socket.id).emit("notify", result),
+                (result) => io.to(socket.id).emit('notify', result),
                 (error) => console.log(error)
             );
         });
 
-        socket.on("requestSend", (id) => {
+        socket.on('requestSend', (id) => {
             let promise = new Promise(function (resolve, result) {
                 setTimeout(
                     () =>
                         resolve(
                             Notification.findOne({
                                 userId: id,
-                                "msg.read": false,
+                                'msg.read': false,
                             })
                         ),
                     1000
                 );
             });
             promise.then(
-                (result) => socket.broadcast.emit("notify", result),
+                (result) => socket.broadcast.emit('notify', result),
                 (error) => console.log(error)
             );
         });
 
-        socket.on("loadMsg", (id) => {
+        socket.on('loadMsg', (id) => {
             let promise = new Promise(function (resolve, result) {
                 setTimeout(
                     () => resolve(Notification.findOne({ userId: id })),
@@ -49,12 +49,12 @@ module.exports = function (io) {
                 );
             });
             promise.then(
-                (result) => io.to(socket.id).emit("receiveMsg", result),
+                (result) => io.to(socket.id).emit('receiveMsg', result),
                 (error) => console.log(error)
             );
         });
 
-        socket.on("requestMsg", (id) => {
+        socket.on('requestMsg', (id) => {
             let promise = new Promise(function (resolve, result) {
                 setTimeout(
                     () => resolve(Notification.findOne({ userId: id })),
@@ -62,34 +62,34 @@ module.exports = function (io) {
                 );
             });
             promise.then(
-                (result) => socket.broadcast.emit("receiveMsg", result),
+                (result) => socket.broadcast.emit('receiveMsg', result),
                 (error) => console.log(error)
             );
         });
 
-        socket.on("refreshChat", () => {
-            socket.broadcast.emit("loadChat");
+        socket.on('refreshChat', () => {
+            socket.broadcast.emit('loadChat');
         });
 
-        socket.on("refreshGroupChat", () => {
-            socket.broadcast.emit("loadGroupChat");
+        socket.on('refreshGroupChat', () => {
+            socket.broadcast.emit('loadGroupChat');
         });
 
-        socket.on("markAsRead", (msg) => {
-            io.emit("addMark", msg);
+        socket.on('markAsRead', (msg) => {
+            io.emit('addMark', msg);
         });
 
-        socket.on("Marked", (msg) => {
-            socket.broadcast.emit("loadMark", msg);
+        socket.on('Marked', (msg) => {
+            socket.broadcast.emit('loadMark', msg);
         });
 
-        socket.on("online", (id) => {
+        socket.on('online', (id) => {
             User.updateOne({ _id: id }, { online: true }, (err, data) => {});
-            socket.broadcast.emit("refreshList");
+            socket.broadcast.emit('refreshList');
         });
-        socket.on("offline", (id) => {
+        socket.on('offline', (id) => {
             User.updateOne({ _id: id }, { online: false }, (err, data) => {});
-            socket.broadcast.emit("refreshList");
+            socket.broadcast.emit('refreshList');
         });
     });
 };
